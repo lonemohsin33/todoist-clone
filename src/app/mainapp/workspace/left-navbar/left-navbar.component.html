@@ -1,0 +1,83 @@
+<div class="background-nav" *ngIf="is_collapsed">
+    <div class="profile-nav-div-nav  mb-4">
+        <div class="profile-img-name-div ">
+            <img class="profile-img" src="assets/me.jpeg" alt="profile">
+            <p style="font-size: small; text-align: center;">name <i class="bi bi-chevron-down" style="font-size: 0.5rem; text-align: center;"></i></p>
+        </div>
+        <div class="">
+            <i class="bi bi-bell file-icon"></i>
+                &nbsp;
+                <i class="bi bi-list file-icon" (click)="collapse_navbar()"></i>
+        </div>
+    </div>
+    <div *ngFor="let item of items; let i=index">
+        <div class="menu-items-div height" id="item{{i}}" (click)="item_click(item, i)">
+            <p class="p-class" [ngClass]="item.name == 'Add task' ? 'task-class' : 'basic-class'">
+                <i [class]="item.class" [ngClass]="item.icon" style="font-size: large;"></i>
+                &nbsp; {{item.name}}
+            </p>
+            <p class="me-2 basic-class">
+                {{item.value}}
+            </p>
+        </div>
+          
+    </div>
+    <div class="mt-4">
+        <div class="profile-nav-div  mb-2 ">
+            <div class="profile-img-name-div ">
+                <img class="project-img" src="assets/me.jpeg" alt="profile">
+                <p style="font-size: small; padding: 0px; margin: 0px;">My Projects</p>
+            </div>
+            <div class="notification-menu-div me-1">
+                <i class="bi bi-plus" style="font-size: large;"></i>
+                &nbsp;
+                <i [class]="chevron_class" style="font-size: small;" data-toggle="tooltip" title="click to Toggle" (click)="toggle_items_list('projects')"></i>
+
+            </div>
+        </div>
+        <div *ngIf="!hide_project_div">
+            <div *ngFor="let item of my_projects" class="menu-items-div height" (click)="item_click(item)">
+                <p class="p-class" [ngClass]="item.name == 'Add task' ? 'task-class' : 'basic-class'">
+                    <i [class]="item.class" [ngClass]="item.icon" style="font-size: large;"></i>
+                    &nbsp; {{item.name}}
+                </p>
+                <p class="me-2 basic-class">
+                    {{item.value}}
+                </p>  
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="mt-4">
+        <div class="profile-nav-div  mb-2 ">
+            <div class="profile-img-name-div ">
+                <img class="project-img" src="assets/test.jpg" alt="profile">
+                <p style="font-size: small; padding: 0px; margin: 0px;">My Team</p>
+            </div>
+            <div class="notification-menu-div me-1">
+                <i class="bi bi-plus" style="font-size: large"></i>
+                &nbsp;
+                <i [class]="chevron_class" style="font-size: small;" data-toggle="tooltip" title="click to Toggle" (click)="toggle_items_list('teams')"></i>
+            </div>
+        </div>
+        <div *ngIf="!hide_team_div">
+            <div *ngFor="let item of my_projects" class="menu-items-div height">
+                <p class="p-class" [ngClass]="item.name == 'Add task' ? 'task-class' : 'basic-class'">
+                    <i [class]="item.class" [ngClass]="item.icon" style="font-size: large;"></i>
+                    &nbsp; {{item.name}}
+                </p>
+                <p class="me-2 basic-class">
+                    {{item.value}}
+                </p>  
+            </div>
+        </div>
+        
+    </div>
+   
+
+</div>
+
+<div class="profile-nav-div-icon p-2 nav-transition" *ngIf="!is_collapsed">
+    <i class="bi bi-list mb-4 file-icon" (click)="collapse_navbar()"></i>
+</div>

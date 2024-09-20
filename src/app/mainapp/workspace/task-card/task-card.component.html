@@ -1,0 +1,39 @@
+<section *ngIf="show_card" class="col-12 col-md-8 boxsection">
+    <input class="form-control shadow-none border-0 textsmall" type="text" placeholder="Task Name" [(ngModel)]="task_name">
+    <textarea class="form-control border-0 shadow-none textsmall" placeholder="Description" rows="1" [(ngModel)]="task_desc"></textarea>
+    <div class="d-flex form-control shadow-none border-0 gap-2" style="position: relative;">
+        <div class="calender-items" (click)="open_calender()">
+            <i id="curr-date" [ngClass]="!show_remove_icon?'color': 'green-color'" class="bi bi-plus-circle-fill color"> &nbsp;{{due_date}} 
+                <i *ngIf="show_remove_icon" class="bi bi-x color ms-1 del-icon" (click)="remove_today()"></i>
+            </i>
+        </div>
+        <div>
+            <div class="calender-items" (click)="show_priority_list()">
+                <i class="color" [ngClass]="priority_icon" [ngStyle]="{'color': priority_color}"> &nbsp;{{priority}}</i>
+            </div>
+            <div class="upper-element" *ngIf="toggle_priority_list">
+                <ul class="list-unstyled mx-2">
+                    <li *ngFor="let item of priority_list; let i=index;"><i class="color text-center fw-light" [ngClass]="item.icon" [ngStyle]="{'color': item.color}" 
+                    (click)="priority_selected(i, item)"> &nbsp;{{item.value}}</i>
+                    <i *ngIf="selected_priority === i" class="bi bi-check color text-center fw-2 ms-2" [ngStyle]="{'color': item.color}"></i> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="calender-items">
+            <i class="bi bi-plus-circle-fill color"> &nbsp;{{reminder}}</i>
+        </div>
+    </div>
+    <hr class="p-0 m-0">
+    <div class="form-control border-0 shadow-none d-flex justify-content-between" >
+        <div class="">
+            <i class="bi bi-inbox" style="font-weight:500; color: grey; font-size: 12px;"> Inbox &nbsp;<i class="bi bi-chevron-down" style="font-size: 0.5rem; text-align: center;"></i></i>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-secondary btn-rounded" (click)="cancel_task()"> Cancel</button>
+            <button *ngIf="task_name.length > 3 && task_desc.length > 3" class="btn btn-danger btn-rounded" (click)="add_task()">Add task</button>
+        </div>
+    </div>
+</section>
+
+

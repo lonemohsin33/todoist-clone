@@ -1,0 +1,34 @@
+.custom-hr {
+    width: 50vw;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+.custom-hr {
+    width: 80vw;
+    font-weight: 500;
+    margin-top: 2px;
+}
+}
+
+.custom-width {
+    width: 47vw;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+.custom-width {
+    width: 77vw;
+    font-weight: 500;
+}
+}
+
+.task-item{
+    transition: all .3s ease-in-out;
+}
+.task-item:hover{
+    color: blue;
+    transform: scale(1.01);
+    cursor: pointer;
+}

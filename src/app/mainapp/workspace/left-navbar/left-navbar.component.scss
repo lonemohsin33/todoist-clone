@@ -1,0 +1,162 @@
+.profile-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; /* Ensures a circular shape */
+    overflow: hidden; /* Hides overflow content */
+}
+.border-a{
+    border: 2px solid red;
+}
+
+.background-nav{
+    position: relative;
+    background-color:rgb(245, 238, 227);
+    height: 100vh;
+    width: 220px;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.profile-nav-div{
+    z-index: 1000;
+    position: relative;
+    display: flex;
+    height: 30px;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background-color 0.3s ease;   
+}
+.profile-img-name-div{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.profile-img-name-div > .profile-img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.menu-items-div{
+    width: 100%; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+.menu-items-div:hover{
+    background-color: #fffdf6;// #aba89f;
+    border-radius: 5px;
+}
+
+.task-class {
+    font-size: 0.7em;
+    color: red;
+    text-align: start;  
+}
+.basic-class{
+    font-size: x-small;
+    color:black;
+    text-align: start;
+}
+.p-class{
+    display: flex;
+    align-items: center;
+    height: inherit;
+    margin: 3px;
+}
+
+.height{
+    max-height: fit-content;
+}
+
+.my-projects-div{
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    gap: 0.5em;
+    text-align: center;
+}
+
+.project-img{
+    width: 25px;
+    height: 25px;
+    border-radius: 20%;
+}
+
+.notification-menu-div{ 
+    gap: 0.5em;
+    display: none;
+}
+p{
+    padding: 0px;
+    margin: 0px;
+}
+
+.profile-nav-div:hover .notification-menu-div{
+    display: block;
+}
+
+.profile-nav-div:hover {
+    background-color: #fffdf6; //   #aba89f;
+    border-radius: 5px;
+    height: 30px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .background-nav{
+        position: absolute;
+        width: 70vw;
+        z-index: 1000;
+    }
+    .profile-nav-div-icon{
+        position: fixed;
+        z-index: 1000;
+    
+    }
+}
+
+.file-icon{
+    cursor: pointer;
+
+}
+.file-icon:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 30px 20px rgba(0, 0, 0, 0.1);  
+}
+
+.profile-nav-div-nav{
+    z-index: 1000;
+    position: relative;
+    display: flex;
+    height: 30px;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;   
+}
+
+.profile-nav-div-icon{
+    position: fixed;
+
+}
+
+.profile-nav-div-icon:hover{
+    cursor: pointer;
+    transform: scale(1.3);
+    border-radius: 50%;  
+}
+
+.nav-transition{
+    transition: all;
+    transition-duration: 1s;
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-delay: random($limit: 1);
+}
+
+   
+

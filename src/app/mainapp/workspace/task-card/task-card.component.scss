@@ -1,0 +1,99 @@
+p{
+    padding: 0px;
+    margin: 0px;
+}
+
+.add-task-text{
+    font-size: 0.7rem;
+    font-weight: 400;
+    // transition: all ease-in-out 0.3s;
+
+}
+.add-task-text-red{
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: red !important;
+    // transition: all ease-in-out 0.3s;
+
+}
+.today-cont{
+    position: relative;
+    // height: 100vh;
+    // width: 70vw;
+
+}
+
+.add-item-div{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px){
+
+    .today{
+        //  opacity: 0.5;
+         background-color: rgba(0, 0, 0, 0.4);
+        //  transition:opacity var(--sidebar-toggle-transition-duration: 300ms;)
+    }
+}
+
+textarea{
+    font-size: small;
+}
+.boxsection{
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+@media (max-width: 767px) {
+    .boxsection {
+        width: 90%;
+    }
+}
+button{
+    font-size: xx-small;
+}
+.calender-items{
+    border: 1px solid grey;
+    border-radius: 5px;
+    opacity: 0.8;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    font-family: inherit;
+    display: flex;
+    justify-content: center;
+
+}
+.color{
+    font-size: 11px;
+    font-weight: 300;
+}
+
+.green-color{
+    font-size: 11px;
+    font-weight: 300;
+    color:green;    
+}
+// .green-color:hover{
+//     cursor: pointer;
+// }
+.del-icon{
+    transition: all 0.3s ease-in-out !important;
+}
+.del-icon:hover{
+    transform: scale(1.2) !important;
+}
+
+.upper-element{
+    position: absolute;
+    top: 100%; /* Position it just below the priority section */
+    width: 25%; /* Adjust width as necessary */
+    background-color: white; /* Optional: Add background to make it stand out */
+    z-index: 1; /* Ensure it's on top of other content */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Optional: Add shadow */
+}
+
+
+
+
