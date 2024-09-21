@@ -2,18 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedComponentsRoutingModule } from './shared-components-routing.module';
-import { TimePickerComponentComponent } from './time-picker-component/time-picker-component.component';
-import { NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { CalenderComponentComponent } from './calender-component/calender-component.component';
 
-
+const components = [CalenderComponentComponent]
 @NgModule({
-  declarations: [TimePickerComponentComponent],
+  declarations: [CalenderComponentComponent],
   imports: [
     CommonModule,
     SharedComponentsRoutingModule,
-    NgbTimepickerModule,
-    FormsModule
-  ]
+    FormsModule,
+    NgbModule
+  ],
+  exports: components
 })
 export class SharedComponentsModule { }

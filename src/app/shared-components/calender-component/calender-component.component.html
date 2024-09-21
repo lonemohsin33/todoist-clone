@@ -1,0 +1,5 @@
+<div class="custom-datepicker-container">
+    <ngb-datepicker [(ngModel)]="due_date" (dateSelect)="on_date_select($event)" autoClose="true">    
+    </ngb-datepicker>
+    <ngb-timepicker [(ngModel)]="time" [hourStep]="hourStep" [minuteStep]="minuteStep" [meridian]="false" [spinners]="true"></ngb-timepicker> 
+</div>
