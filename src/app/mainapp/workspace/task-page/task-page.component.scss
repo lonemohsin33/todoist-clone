@@ -1,6 +1,6 @@
 .open-nav{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .close-nav{
@@ -11,10 +11,10 @@
 @media (max-width: 768px) {
     .open-nav{
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
     }
     .close-nav{
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
     }
 }
