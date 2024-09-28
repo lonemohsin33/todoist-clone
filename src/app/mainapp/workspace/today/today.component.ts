@@ -1,5 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbDateStruct, NgbDatepicker, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { DateService } from 'src/app/services/date.service';
+import { CalenderComponentComponent } from 'src/app/shared-components/calender-component/calender-component.component';
+import { TaskCardComponent } from '../task-card/task-card.component';
 
 @Component({
   selector: 'app-today',
@@ -8,37 +11,18 @@ import { NgbDateStruct, NgbDatepicker, NgbTimeStruct } from '@ng-bootstrap/ng-bo
 })
 export class TodayComponent implements OnInit {
   @ViewChild('datepicker', {static:false}) datepicker: NgbDatepicker;
+  @ViewChild('taskcard', {static:false}) taskcard!:ElementRef ;
+  @ViewChild(TaskCardComponent, {static:false}) task_card_comp!: TaskCardComponent;
+  
   @Input() show_navbar:Boolean = true
   is_hovered:boolean = false
   task_list: {}[] = JSON.parse(localStorage.getItem("task_list"))|| []
-  new_task_clicked: boolean = false
-  calendar_open = false
-  month_names = {1:"Jan", 2: "Feb", 3:"March", 4:"April", 5:"May", 6:"June", 7:"July", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
-  due_date: NgbDateStruct
-  today: NgbDateStruct; // To store today's date
-  date_to_show= ""
-  days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  day_name = ""
-  time:NgbTimeStruct = { hour: 13, minute: 30, second: 0 };
-  hourStep = 1;
-  minuteStep = 15;
-  meridian = false;
-  constructor() { }
+  show_task_card: boolean = false
+  date_extended = {}
+  constructor(private date:DateService) { }
 
   ngOnInit() {
-    this.set_today()
-  }
-
-  set_today() {
-    const now = new Date();
-    this.today = {
-      year: now.getFullYear(),
-      month: now.getMonth() + 1,
-      day: now.getDate()
-    };
-    this.due_date = this.today
-    this.day_name = this.days[now.getDay()];
-    console.log(this.day_name)
+    this.date_extended= this.date.set_and_get_today()
   }
 
   recieve_collapse_event(event){
@@ -55,51 +39,28 @@ export class TodayComponent implements OnInit {
   }
 
   create_new_task(){
-    this.new_task_clicked = true
-  }
-
-  on_date_select(event){
-    this.calendar_open= false
-    const day_difference = event.day - this.today.day;
-    let category;
-    if (day_difference === 0) {
-      category = 'Today';
-    } else if (day_difference === 1) {
-      category = 'Tomorrow';
-    } else if (day_difference >= 2 && day_difference <= 7) {
-      category = 'week'; 
-    }else if (day_difference > 7 && day_difference <= 30) {
-      category = 'month'; 
-    } else {
-      category = 'default'; // Default category
-    }
-  
-    switch(category) {
-      case 'Today':
-        this.date_to_show = "Today";
-        break;
-      case 'Tomorrow':
-        this.date_to_show = "Tomorrow";
-        break;
-      case 'week':
-        this.date_to_show = "This Week";
-        break;
-      case 'month':
-        this.date_to_show = "This Month";
-        break;
-      default:
-        this.date_to_show = event.day + " " + this.month_names[event.month] + " " + event.year;
-    }
-    this.due_date = event
-    console.log(this.today)
-
+    this.show_task_card = true
+    setTimeout(() => {
+      if (this.task_card_comp) {
+          this.task_card_comp.set_focus(); // Call the set_focus method on the child component
+      }
+  }, 0); 
   }
 
   add_new_task(task){
     this.task_list.push(task)
     console.log(this.task_list)
     localStorage.setItem("task_list", JSON.stringify(this.task_list))
-    this.new_task_clicked = false
+    this.show_task_card = false
+  }
+
+  show_card(event){
+    console.log(event)
+    this.show_task_card = event
+  }
+
+  date_event(event){
+    this.date_extended = event
   }
 
 }

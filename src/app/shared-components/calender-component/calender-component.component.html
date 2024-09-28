@@ -1,5 +1,6 @@
-<div class="custom-datepicker-container">
+<div #calender class="custom-datepicker-container">
     <ngb-datepicker [(ngModel)]="due_date" (dateSelect)="on_date_select($event)" autoClose="true">    
     </ngb-datepicker>
-    <ngb-timepicker [(ngModel)]="time" [hourStep]="hourStep" [minuteStep]="minuteStep" [meridian]="false" [spinners]="true"></ngb-timepicker> 
+    <ngb-timepicker [(ngModel)]="time" [hourStep]="hourStep" [minuteStep]="minuteStep" [meridian]="false" [spinners]="true"></ngb-timepicker>
+    <button id="button" class="btn btn-sm btn-danger btn-pill w-100" (click)="close_calender()">close</button> 
 </div>

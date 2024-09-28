@@ -5,7 +5,7 @@
             <p style="margin: 0;">{{task.task_name}}</p>
             <p *ngIf="task.task_desc.length>0" style="font-size: 11px; margin: 0;">{{task.task_desc}}</p>
             <div class="m-0 d-inline-flex justify-content-between custom-width" style="margin: 0;">
-                <i class="bi bi-check-circle text-center me-2" style="font-size: 10px; margin: 0; color: green; cursor: pointer;"> {{task.due_date}}</i>
+                <i class="bi bi-check-circle text-center me-2" style="font-size: 10px; margin: 0; color: green; cursor: pointer;" [ngStyle]="{color:task.due_color}"> {{task.due_date}}</i>
                 <p  style="font-size: 10px; margin: 0;">inbox&nbsp; <i class="bi bi-inbox"></i></p>
             </div>
             

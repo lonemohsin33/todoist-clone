@@ -94,6 +94,22 @@ button{
     border-radius: 10px; /* Optional: Add shadow */
 }
 
+.calender{
+    position: absolute;
+    padding: 0;
+    z-index: 1000;
+
+}
+.custom-width{
+    width: 50vw;
+}
+
+@media (max-width: 768px) {
+    .custom-width{
+        width: 80vw;
+    }
+    }
+
 
 
 

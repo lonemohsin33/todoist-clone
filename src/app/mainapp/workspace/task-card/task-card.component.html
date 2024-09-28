@@ -1,9 +1,9 @@
-<section *ngIf="show_card" class="col-12 col-md-8 boxsection">
+<section #taskcard *ngIf="show_card" class="col-12 col-md-8 boxsection custom-width">
     <input class="form-control shadow-none border-0 textsmall" type="text" placeholder="Task Name" [(ngModel)]="task_name">
     <textarea class="form-control border-0 shadow-none textsmall" placeholder="Description" rows="1" [(ngModel)]="task_desc"></textarea>
     <div class="d-flex form-control shadow-none border-0 gap-2" style="position: relative;">
         <div class="calender-items" (click)="open_calender()">
-            <i id="curr-date" [ngClass]="!show_remove_icon?'color': 'green-color'" class="bi bi-plus-circle-fill color"> &nbsp;{{due_date}} 
+            <i id="curr-date" [ngStyle]="{color:diff_color}" [ngClass]="!show_remove_icon?'color': 'green-color'" class="bi bi-plus-circle-fill color"> &nbsp;{{due_date}} {{due_time}}
                 <i *ngIf="show_remove_icon" class="bi bi-x color ms-1 del-icon" (click)="remove_today()"></i>
             </i>
         </div>
@@ -35,5 +35,9 @@
         </div>
     </div>
 </section>
+
+<div #calender *ngIf="calendar_open" class="calender">
+    <app-calender-component (date_to_show)="date_to_show($event)" (calendar_open)="calendar_open=$event"></app-calender-component>
+</div>
 
 
