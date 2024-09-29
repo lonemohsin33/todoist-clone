@@ -20,6 +20,7 @@ export class CalenderComponentComponent implements OnInit {
   month_names = {1:"Jan", 2: "Feb", 3:"March", 4:"April", 5:"May", 6:"June", 7:"July", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
   today:NgbDateStruct
   day_name= ""
+  min_date:NgbDateStruct
 
   constructor() { }
 
@@ -87,6 +88,7 @@ export class CalenderComponentComponent implements OnInit {
       day: now.getDate()
     };
     this.due_date = this.today
+    this.min_date = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() }
   }
 
   close_calender(){

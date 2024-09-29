@@ -36,6 +36,7 @@ export class TaskCardComponent implements OnInit {
   task_desc = ""
   due_time = ""
   diff_color = ""
+  day_diff = 0
 
   constructor() { }
 
@@ -74,7 +75,8 @@ export class TaskCardComponent implements OnInit {
         "priority_color": this.priority_color
       },
       "due_date": this.due_date,
-      "due_color": this.diff_color
+      "due_color": this.diff_color,
+      "day_diff": this.day_diff
     }
     this.add_task_to_task_list.emit(task_obj)
   }
@@ -133,6 +135,7 @@ export class TaskCardComponent implements OnInit {
     this.due_date= date_selected.day
     this.due_time = date_selected.time
     let day_diff = date_selected.day_diff
+    this.day_diff = day_diff
     this.get_date_color(day_diff)
   }
 

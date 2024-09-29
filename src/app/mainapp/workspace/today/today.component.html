@@ -6,13 +6,30 @@
         <div class="col-10 col-md-10 mb-4" *ngIf="task_list.length>0">
             <i class="bi bi-check-circle" style="font-size: 10px;">&nbsp;{{task_list.length}} task</i>
         </div>
-        <div class="col-10 col-md-10">
+        <div *ngIf="overdue_task_list.length" class="col-10 col-md-10">
+            <div class="d-flex align-items-center" style="position: relative;">
+              <div class="col-md-8 col-8">
+                <i *ngIf="overdue_not_hidden" class="bi bi-chevron-down fw-bold" style="font-size: small; text-align: center;" (click)="overdue_not_hidden = false"> Overdue</i>
+                <i *ngIf="!overdue_not_hidden" class="bi bi-chevron-right fw-bold" style="font-size: small; text-align: center;"
+                   (click)="overdue_not_hidden = true"> Overdue</i>
+              </div>
+              <div class="col-md-2 col-2 text-start" style="font-size:x-small; text-align: center; color: #dc4c3e;">
+               <button #rescheduleButton (click)="calendar_open_func()" class="btn fw-bold btn-sm" style="color: #dc4c3e;">Reschedule</button> 
+              </div>
+            </div>
+            <hr class="custom-hr">
+        </div>
+          
+        <div *ngIf="overdue_task_list.length && overdue_not_hidden" class="col-10 col-md-10">
+            <app-task-list-component [task_list]="overdue_task_list"></app-task-list-component>
+        </div>
+        <div class="col-10 col-md-10 mt-4">
             <p class="fw-bold" style="font-size:small;">{{date_extended.day}} {{date_extended.month_name}} - Today - {{date_extended.day_name}}</p>
             <hr class="custom-hr">
 
         </div>
         <div class="col-10 col-md-10">
-            <app-task-list-component [task_list]="task_list"></app-task-list-component>
+            <app-task-list-component [task_list]="today_task_list"></app-task-list-component>
         </div>
     </div>
     
@@ -40,4 +57,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="calendar_open" [ngStyle]="{'position': 'absolute', 'top': calendarPosition.top, 'left': calendarPosition.left, 'z-index': '1000'}" style="background-color: white;">
+    <app-calender-component (date_to_show)="date_to_show($event)" (calendar_open)="calendar_open=$event"></app-calender-component>
 </div>

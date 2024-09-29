@@ -58,10 +58,13 @@ button{
 
 .calender{
     position: absolute;
-    padding: 0;
+    right: 20px;
     z-index: 1000;
+    background-color: white; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 }
+
 
 hr.custom-hr {
     width: 50vw;
@@ -74,6 +77,13 @@ hr.custom-hr {
     width: 80vw;
     margin-top: 1px;
     font-weight: 500;
+}
+.calender{
+    position: absolute;
+    padding: 0;
+    z-index: 1000;
+    background-color: white; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 }
 
