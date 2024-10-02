@@ -1,11 +1,11 @@
-<div *ngFor="let task of task_list">
+<div *ngFor="let task of task_list;let i=index">
     <div class="d-inline-flex">
         <i class="bi bi-check-circle text-center task-item me-2" style="font-size: 1rem;"></i>
         <div>
             <p style="margin: 0;">{{task.task_name}}</p>
             <p *ngIf="task.task_desc.length>0" style="font-size: 11px; margin: 0;">{{task.task_desc}}</p>
             <div class="m-0 d-inline-flex justify-content-between custom-width" style="margin: 0;">
-                <i class="bi bi-calendar2-event text-center me-2" style="font-size: 10px; margin: 0; color: green; cursor: pointer;" [ngStyle]="{color:task.due_color}"> {{task.due_date}}</i>
+                <i id="task{{i}}" (click)="calendar_open_func(i)" class="bi bi-calendar2-event text-center me-2" style="font-size: 10px; margin: 0; color: green; cursor: pointer;" [ngStyle]="{color:task.due_color}"> {{task.due_date}}</i>
                 <p *ngIf="show_inbox"  style="font-size: 10px; margin: 0;">inbox&nbsp; <i class="bi bi-inbox"></i></p>
             </div>
             
@@ -14,4 +14,8 @@
     </div>
 
     <hr class="custom-hr">
+</div>
+
+<div *ngIf="calendar_open" [ngStyle]="{'position': 'absolute', 'top': calendarPosition.top, 'left': calendarPosition.left, 'z-index': '1000'}" style="background-color: white;">
+    <app-calender-component (date_to_show)="date_to_show($event)" (calendar_open)="calendar_open=$event"></app-calender-component>
 </div>

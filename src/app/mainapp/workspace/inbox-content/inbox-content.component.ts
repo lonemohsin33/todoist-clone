@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { TaskCardComponent } from '../task-card/task-card.component';
 import { DateService } from 'src/app/services/date.service';
+import { Task } from '../task-card/interfaces';
 
 @Component({
   selector: 'app-inbox-content',
@@ -17,12 +18,11 @@ export class InboxContentComponent implements OnInit {
   
   @Input() show_navbar:Boolean = true
   is_hovered:boolean = false
-  task_list: {}[] = JSON.parse(localStorage.getItem("task_list"))|| []
+  task_list: Task[] = JSON.parse(localStorage.getItem("task_list"))|| []
   show_task_card: boolean = false
   date_extended = {}
   today_task_list = []
   overdue_task_list = []
-  all_tasks=[]
 
   constructor(private date:DateService) { }
 
@@ -32,8 +32,9 @@ export class InboxContentComponent implements OnInit {
   }
 
   filter_tasks(){
-    this.all_tasks = JSON.parse(localStorage.getItem('task_list')||'[]')
-    // this.all_tasks = this.all_tasks.sort((a, b) => new Date(a.date) - new Date(b.date));
+    this.task_list = JSON.parse(localStorage.getItem('task_list')||'[]')
+    let sorted_tasks = this.task_list.sort((a, b) => new Date(a.date_time_date_format).getTime() - new Date(b.date_time_date_format).getTime());
+    this.task_list = sorted_tasks
 
   }
 

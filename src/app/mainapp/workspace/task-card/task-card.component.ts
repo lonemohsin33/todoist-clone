@@ -84,6 +84,7 @@ export class TaskCardComponent implements OnInit {
 
   today_selected(){
     this.due_date = "Today"
+    this.due_date_time_format= new Date()
     this.diff_color ="green"
     this.show_remove_icon = true
     console.log(this.show_remove_icon)
