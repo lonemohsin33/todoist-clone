@@ -10,11 +10,12 @@ import { NgbModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaskListComponentComponent } from './task-list-component/task-list-component.component';
 import { SharedComponentsModule } from 'src/app/shared-components/shared-components.module';
 import { TodayComponent } from './today/today.component';
+import { InboxContentComponent } from './inbox-content/inbox-content.component';
 
 
 
 @NgModule({
-  declarations: [LeftNavbarComponent, TaskPageComponent, InboxComponent, TaskCardComponent, TaskListComponentComponent, TodayComponent],
+  declarations: [LeftNavbarComponent, TaskPageComponent, InboxComponent, TaskCardComponent, TaskListComponentComponent, TodayComponent, InboxContentComponent],
   imports: [
     CommonModule,
     WorkspaceRoutingModule,

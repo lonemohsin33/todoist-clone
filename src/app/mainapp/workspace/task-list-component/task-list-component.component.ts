@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TaskListComponentComponent implements OnInit {
   @Input() task_list:[] = []
+  @Input() show_inbox:boolean = true
 
   constructor() { }
 

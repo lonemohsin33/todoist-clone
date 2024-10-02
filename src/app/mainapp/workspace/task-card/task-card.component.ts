@@ -11,7 +11,6 @@ export class TaskCardComponent implements OnInit {
   @ViewChild(CalenderComponentComponent, {static:false}) calender_comp!:CalenderComponentComponent
   @ViewChild('calender', { static: false }) calender!: ElementRef;
   @ViewChild('taskcard', { static: false }) taskcard!: ElementRef;
-
   @Input() show_card = false
   @Output() show_card_output = new EventEmitter()
   // @Output() show_calender = new EventEmitter()
@@ -37,6 +36,7 @@ export class TaskCardComponent implements OnInit {
   due_time = ""
   diff_color = ""
   day_diff = 0
+  due_date_time_format:Date
 
   constructor() { }
 
@@ -76,7 +76,8 @@ export class TaskCardComponent implements OnInit {
       },
       "due_date": this.due_date,
       "due_color": this.diff_color,
-      "day_diff": this.day_diff
+      "day_diff": this.day_diff,
+      "date_time_date_format":this.due_date_time_format
     }
     this.add_task_to_task_list.emit(task_obj)
   }
@@ -132,6 +133,7 @@ export class TaskCardComponent implements OnInit {
 
   date_to_show(date_selected){
     console.log(date_selected)
+    this.due_date_time_format = date_selected.date_time_date_format
     this.due_date= date_selected.day
     this.due_time = date_selected.time
     let day_diff = date_selected.day_diff

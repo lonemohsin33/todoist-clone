@@ -38,6 +38,7 @@ export class CalenderComponentComponent implements OnInit {
   }
 
   on_date_select(event){
+    const date_time_date_format=this.combine_date_and_time(event)
     const day_difference = event.day - this.today.day;
     const year_diff = Number(event.year) - Number(this.today.year)
     let year = event.year
@@ -60,19 +61,19 @@ export class CalenderComponentComponent implements OnInit {
   
     switch(category) {
       case 'Today':
-        this.date_to_show.emit({day:"Today", time:time, day_diff:day_difference});
+        this.date_to_show.emit({day:"Today", time:time, day_diff:day_difference, date_time_date_format:date_time_date_format});
         break;
       case 'Tomorrow':
-        this.date_to_show.emit({day:"Tomorrow", time: time, day_diff:day_difference});
+        this.date_to_show.emit({day:"Tomorrow", time: time, day_diff:day_difference, date_time_date_format:date_time_date_format});
         break;
       case 'week':
-        this.date_to_show.emit({day:"This Week", time:time, day_diff:day_difference});
+        this.date_to_show.emit({day:"This Week", time:time, day_diff:day_difference, date_time_date_format:date_time_date_format});
         break;
       case 'month':
-        this.date_to_show.emit({day:"This Month", time:this.time, day_diff:day_difference});
+        this.date_to_show.emit({day:"This Month", time:this.time, day_diff:day_difference, date_time_date_format:date_time_date_format});
         break;
       default:
-        this.date_to_show.emit({day:event.day + " " + this.month_names[event.month] + " " + year, time:time, day_diff:day_difference});
+        this.date_to_show.emit({day:event.day + " " + this.month_names[event.month] + " " + year, time:time, day_diff:day_difference, date_time_date_format:date_time_date_format});
     }
     this.calendar_open.emit(false)
     this.due_date = event
@@ -93,6 +94,12 @@ export class CalenderComponentComponent implements OnInit {
 
   close_calender(){
     this.calendar_open.emit(false)
+  }
+
+  combine_date_and_time(date_values){
+    const date_time = new Date(date_values.year, date_values.month - 1, date_values.day, 
+      this.time.hour, this.time.minute, this.time.second);
+    return date_time
   }
 
 }
