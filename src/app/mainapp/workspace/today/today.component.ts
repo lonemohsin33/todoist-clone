@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbDateStruct, NgbDatepicker, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DateService } from 'src/app/services/date.service';
 import { CalenderComponentComponent } from 'src/app/shared-components/calender-component/calender-component.component';
@@ -14,6 +14,7 @@ export class TodayComponent implements OnInit {
   @ViewChild('taskcard', {static:false}) taskcard!:ElementRef ;
   @ViewChild(TaskCardComponent, {static:false}) task_card_comp!: TaskCardComponent;
   @ViewChild('rescheduleButton', { static: false }) rescheduleButton!: ElementRef;
+  @Output() task_count = new EventEmitter()
 
   
   @Input() show_navbar:Boolean = true
@@ -44,6 +45,8 @@ export class TodayComponent implements OnInit {
 
   filter_tasks(){
     let all_tasks = JSON.parse(localStorage.getItem('task_list')||'[]')
+    this.today_task_list=[]
+    this.overdue_task_list = []
     console.log(all_tasks)
     all_tasks.map((task_item)=>{
       if (task_item.day_diff ==0){
@@ -82,7 +85,7 @@ export class TodayComponent implements OnInit {
       this.today_task_list.push(task)
     }
     this.task_list.push(task)
-    console.log(this.task_list)
+    this.count_tasks()
     localStorage.setItem("task_list", JSON.stringify(this.task_list))
     this.show_task_card = false
   }
@@ -94,6 +97,22 @@ export class TodayComponent implements OnInit {
 
   date_event(event){
     this.date_extended = event
+  }
+
+  overdue_task_list_func(task_obj){
+    this.overdue_task_list=this.overdue_task_list.filter(obj=>obj.id!==task_obj.id)
+    this.count_tasks()
+  }
+
+  today_task_list_func(task_obj){
+    this.today_task_list=this.today_task_list.filter(obj=>obj.id!==task_obj.id)
+    this.count_tasks()
+  }
+
+  count_tasks(){
+    let task_count = {"Today": this.today_task_list.length + this.overdue_task_list.length,"Inbox":this.task_list.length, "Upcoming":this.task_list.length-(this.today_task_list.length + this.overdue_task_list.length)}
+    console.log(this.task_list)
+    this.task_count.emit(task_count)
   }
 
 }

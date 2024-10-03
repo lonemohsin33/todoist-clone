@@ -1,6 +1,6 @@
-<div *ngFor="let task of task_list;let i=index">
+<div id="task{{task.id}}" class="" *ngFor="let task of task_list;let i=index">
     <div class="d-inline-flex">
-        <i class="bi bi-check-circle text-center task-item me-2" style="font-size: 1rem;"></i>
+        <i (click)="complete_task(task, i)" class="bi bi-check-circle text-center task-item me-2" style="font-size: 1rem;"></i>
         <div>
             <p style="margin: 0;">{{task.task_name}}</p>
             <p *ngIf="task.task_desc.length>0" style="font-size: 11px; margin: 0;">{{task.task_desc}}</p>

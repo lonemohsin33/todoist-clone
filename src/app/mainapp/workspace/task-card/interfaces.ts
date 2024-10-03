@@ -5,6 +5,7 @@ export interface PriorityObject {
   }
   
   export interface Task {
+    id:string
     task_name: string;          // Task name as a string
     task_desc: string;          // Task description as a string
     priority_obj: PriorityObject;

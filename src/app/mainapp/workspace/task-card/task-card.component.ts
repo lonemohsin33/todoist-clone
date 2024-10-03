@@ -1,6 +1,7 @@
 import { style } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CalenderComponentComponent } from 'src/app/shared-components/calender-component/calender-component.component';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-task-card',
@@ -67,6 +68,7 @@ export class TaskCardComponent implements OnInit {
   add_task(){
     console.log('task created.')
     let task_obj = {
+      "id": uuidv4(),
       "task_name": this.task_name,
       "task_desc": this.task_desc,
       "priority_obj": {

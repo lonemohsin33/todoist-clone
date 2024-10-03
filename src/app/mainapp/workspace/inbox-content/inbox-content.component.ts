@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { TaskCardComponent } from '../task-card/task-card.component';
 import { DateService } from 'src/app/services/date.service';
@@ -14,6 +14,7 @@ export class InboxContentComponent implements OnInit {
   @ViewChild('taskcard', {static:false}) taskcard!:ElementRef ;
   @ViewChild(TaskCardComponent, {static:false}) task_card_comp!: TaskCardComponent;
   @ViewChild('rescheduleButton', { static: false }) rescheduleButton!: ElementRef;
+  @Output() task_count = new EventEmitter()
 
   
   @Input() show_navbar:Boolean = true
@@ -65,6 +66,7 @@ export class InboxContentComponent implements OnInit {
       this.today_task_list.push(task)
     }
     this.task_list.push(task)
+    this.count_tasks()
     console.log(this.task_list)
     localStorage.setItem("task_list", JSON.stringify(this.task_list))
     this.show_task_card = false
@@ -77,6 +79,12 @@ export class InboxContentComponent implements OnInit {
 
   date_event(event){
     this.date_extended = event
+  }
+
+  count_tasks(){
+    let task_count = {"Today": this.today_task_list.length + this.overdue_task_list.length,"Inbox":this.task_list.length, "Upcoming":this.task_list.length-(this.today_task_list.length + this.overdue_task_list.length)}
+    console.log(this.task_list)
+    this.task_count.emit(task_count)
   }
 
 }

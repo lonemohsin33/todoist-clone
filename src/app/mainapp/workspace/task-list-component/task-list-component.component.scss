@@ -32,3 +32,26 @@
     transform: scale(1.01);
     cursor: pointer;
 }
+
+/* Initial state for the task */
+.task {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Sliding out and fading out effect using keyframes */
+@keyframes slideOut {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+/* Apply the animation when removing a task */
+.slide-out {
+    animation: slideOut 0.5s forwards;  /* 0.5s for the animation duration */
+}
+

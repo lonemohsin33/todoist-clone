@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 // import { stat } from 'fs';
 
@@ -24,11 +24,12 @@ import { Router } from '@angular/router';
 })
 export class LeftNavbarComponent implements OnInit {
   @Output() toggle_navbar = new EventEmitter()
+  @Input() task_counts:{} = {"Inbox": 0, "Upcoming":0, "Today": 0}
 
   constructor(
-  private router:Router
+  private router:Router, private cdr: ChangeDetectorRef
   ) { }
-  items = [{"name": "Add task", "icon": 'bi bi-plus-circle-fill', 'class':'task-class', "value":""}, {"name": "Search", "icon": 'bi bi-search', 'color':'',"value":"2" }, {"name": "inbox", "icon": 'bi bi-inbox', 'color':'',"value":"3", 'route': '/workspace/inbox'},{"name": "Today", "icon": 'bi bi-calendar2-day', 'color':'',"value":"3", 'route': '/workspace/today'}, {"name": "Upcoming", "icon": 'bi bi-calculator', 'color':'', "value":"4"}, {"name": "Filters & Labels", "icon": 'bi bi-filter', 'color':'',"value":""}]
+  items = [{"name": "Add task", "icon": 'bi bi-plus-circle-fill', 'class':'task-class', "value":""}, {"name": "Search", "icon": 'bi bi-search', 'color':'',"value":"0" }, {"name": "Inbox", "icon": 'bi bi-inbox', 'color':'',"value":"0", 'route': '/workspace/inbox'},{"name": "Today", "icon": 'bi bi-calendar2-day', 'color':'',"value":"0", 'route': '/workspace/today'}, {"name": "Upcoming", "icon": 'bi bi-calculator', 'color':'', "value":""}, {"name": "Filters & Labels", "icon": 'bi bi-filter', 'color':'',"value":""}]
 
   my_projects = [
     {
@@ -42,6 +43,26 @@ export class LeftNavbarComponent implements OnInit {
   selected_item : number| null = null
   is_collapsed : boolean = true
   ngOnInit() {
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.task_counts && this.task_counts) {
+      console.log(changes)
+      this.update_task_counts();
+      this.cdr.detectChanges();
+    }
+  }
+
+  private update_task_counts() {
+    // Update the value in items based on task_counts
+    let included_list = ['Inbox', 'Upcoming', 'Today']
+    this.items.forEach(item => {
+      if (!included_list.includes(item.name)) {
+        return; // Skip to the next iteration if not included
+      }
+      if (this.task_counts[item.name] !== undefined) {
+        item.value = this.task_counts[item.name].toString(); // Convert number to string
+      }
+    });
   }
 
   toggle_items_list(list_name){

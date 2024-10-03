@@ -16,7 +16,7 @@
                 <i [class]="item.class" [ngClass]="item.icon" style="font-size: large;"></i>
                 &nbsp; {{item.name}}
             </p>
-            <p class="me-2 basic-class">
+            <p class="me-2 basic-class" *ngIf="item.value !='' && item.value !='0'">
                 {{item.value}}
             </p>
         </div>

@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Task } from '../task-card/interfaces';
 
 @Component({
   selector: 'app-task-list-component',
@@ -6,9 +7,10 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./task-list-component.component.scss']
 })
 export class TaskListComponentComponent implements OnInit {
-  @Input() task_list:[] = []
+  @Input() task_list:Task[] = []
   @Input() show_inbox:boolean = true
   @ViewChild('rescheduleicon', { static: false }) reschedule_icon!: ElementRef;
+  @Output() new_task_list_func = new EventEmitter()
   calendarPosition = { top: '0px', left: '0px' };
   calendar_open=false
 
@@ -23,10 +25,29 @@ export class TaskListComponentComponent implements OnInit {
       const icon_element = document.getElementById('task'+index);
       const button_rect = icon_element.getBoundingClientRect();
       console.log(button_rect)
-      this.calendarPosition.top = `${button_rect.bottom - 41}px`;
+      this.calendarPosition.top = `${button_rect.bottom - 41}px`;    //need to make this better.
       this.calendarPosition.left = `${button_rect.left-273}px`;
       // this.calendarPosition.right = `${button_rect.right}px`
     }
   }
+
+  complete_task(task: Task, index: number) {
+    console.log(task)
+    const taskElement = document.getElementById(`task${task.id}`);
+    
+    if (taskElement) {
+        // Add the slide-out class to trigger the keyframe animation
+        taskElement.classList.add('slide-out');
+        
+        // Listen for the animationend event
+        taskElement.addEventListener('animationend', () => {
+            let new_task_list = JSON.parse(localStorage.getItem('task_list'));
+            new_task_list = new_task_list.filter(obj=> obj.id != task.id)
+            localStorage.setItem('task_list', JSON.stringify(new_task_list));
+            this.new_task_list_func.emit(task)
+        });
+    }
+  }
+
 
 }
