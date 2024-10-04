@@ -11,11 +11,12 @@ import { TaskListComponentComponent } from './task-list-component/task-list-comp
 import { SharedComponentsModule } from 'src/app/shared-components/shared-components.module';
 import { TodayComponent } from './today/today.component';
 import { InboxContentComponent } from './inbox-content/inbox-content.component';
+import { UpcomingTasksComponent } from './upcoming-tasks/upcoming-tasks.component';
 
 
 
 @NgModule({
-  declarations: [LeftNavbarComponent, TaskPageComponent, InboxComponent, TaskCardComponent, TaskListComponentComponent, TodayComponent, InboxContentComponent],
+  declarations: [LeftNavbarComponent, TaskPageComponent, InboxComponent, TaskCardComponent, TaskListComponentComponent, TodayComponent, InboxContentComponent, UpcomingTasksComponent],
   imports: [
     CommonModule,
     WorkspaceRoutingModule,
