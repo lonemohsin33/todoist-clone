@@ -72,7 +72,7 @@ export class TaskCardComponent implements OnInit {
       "task_name": this.task_name,
       "task_desc": this.task_desc,
       "priority_obj": {
-        "priority": this.priority,
+        "priority": this.priority =="Priority"?"Priority 1": this.priority,
         "priority_icon": this.priority_icon,
         "priority_color": this.priority_color
       },
@@ -82,6 +82,16 @@ export class TaskCardComponent implements OnInit {
       "date_time_date_format":this.due_date_time_format
     }
     this.add_task_to_task_list.emit(task_obj)
+    this.clear_form()
+  }
+
+  clear_form(){
+    this.task_name = ""
+    this.task_desc = ""
+    this.priority = "Priority"
+    this.reminder = "Reminder"
+    this.due_time = ""
+    this.today_selected()
   }
 
   today_selected(){
