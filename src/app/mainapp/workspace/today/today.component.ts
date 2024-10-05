@@ -24,9 +24,11 @@ export class TodayComponent implements OnInit {
   date_extended = {}
   today_task_list = []
   overdue_task_list = []
+  upcoming_task_list = []
   overdue_not_hidden = true
   calendar_open=false
   calendarPosition = { top: '0px', left: '0px' };
+  reschedule_date = {}
   constructor(private date:DateService) { }
 
   ngOnInit() {
@@ -34,7 +36,59 @@ export class TodayComponent implements OnInit {
     this.filter_tasks()
   }
 
-  calendar_open_func() {
+  reschedule_previous_tasks() {
+    this.open_calender()
+  }
+
+  reschdule_all_previous_tasks(){
+    let overdue_task_ids =this.get_overdue_task_ids()  //get task ids
+    this.overdue_task_list=[]//empty the overdue list 
+    /* get due color first*/
+    let due_color = this.get_due_color(this.reschedule_date['day_diff'])
+    // change date for these task ids in task list
+    this.reschedule_task_single_multiple(overdue_task_ids, due_color, this.reschedule_date)
+
+  }
+
+  reschedule_task_single_multiple(overdue_task_ids, due_color, reschedule_date){
+    this.task_list.forEach((task,index)=>{
+      if(overdue_task_ids.includes(task['id'])){
+        console.log(task)
+        task['date_time_date_format'] = reschedule_date['date_time_date_format']
+        task['day_diff'] = reschedule_date['day_diff']
+        task['due_color'] = due_color
+        task['due_date'] = reschedule_date['day']
+      }
+    })
+    localStorage.setItem('task_list', JSON.stringify(this.task_list))
+    this.filter_tasks()
+  }
+
+  get_due_color(day_difference){
+    if (day_difference === 0) {
+      return "green"
+    } else if (day_difference === 1) {
+      return "#ad6200"
+    } else if (day_difference >= 2 && day_difference <= 7) {
+      return "#692ec2"
+    } else {
+      return "#666"
+    }
+  }
+
+  get_overdue_task_ids(){
+    let task_ids = []
+    for (let task of this.overdue_task_list){
+      task_ids.push(task['id'])
+    }
+    return task_ids
+  }
+
+  is_object_empty(obj){
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+  }
+
+  open_calender(){
     this.calendar_open = !this.calendar_open;
     if (this.calendar_open && this.rescheduleButton) {
       const button_rect = this.rescheduleButton.nativeElement.getBoundingClientRect();
@@ -53,6 +107,8 @@ export class TodayComponent implements OnInit {
         this.today_task_list.push(task_item)
       }else if (task_item.day_diff<0){
         this.overdue_task_list.push(task_item)
+      }else{
+        this.upcoming_task_list.push(task_item)
       } 
 
     })
@@ -113,6 +169,19 @@ export class TodayComponent implements OnInit {
     let task_count = {"Today": this.today_task_list.length + this.overdue_task_list.length,"Inbox":this.task_list.length, "Upcoming":this.task_list.length-(this.today_task_list.length + this.overdue_task_list.length)}
     console.log(this.task_list)
     this.task_count.emit(task_count)
+  }
+
+  date_to_show(date){
+    console.log(date)
+    this.reschedule_date = date
+    this.reschdule_all_previous_tasks()
+  }
+
+  reschedule_single_task(reschedule_obj){
+    let task_id = [reschedule_obj['task']['id']]
+    let reschedule_date = reschedule_obj['date']
+    let due_color = this.get_due_color(reschedule_obj['date']['day_diff'])
+    this.reschedule_task_single_multiple(task_id, due_color, reschedule_date)
   }
 
 }

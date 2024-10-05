@@ -91,4 +91,39 @@ export class InboxContentComponent implements OnInit {
     this.task_list = this.task_list.filter(obj=>obj.id!==task_obj.id)
   }
 
+  reschedule_single_task(reschedule_obj){
+    let task_id = [reschedule_obj['task']['id']]
+    let reschedule_date = reschedule_obj['date']
+    let due_color = this.get_due_color(reschedule_obj['date']['day_diff'])
+    this.reschedule_task_single_multiple(task_id, due_color, reschedule_date)
+  }
+
+  reschedule_task_single_multiple(overdue_task_ids, due_color, reschedule_date){
+    this.task_list.forEach((task,index)=>{
+      if(overdue_task_ids.includes(task['id'])){
+        console.log(task)
+        task['date_time_date_format'] = reschedule_date['date_time_date_format']
+        task['day_diff'] = reschedule_date['day_diff']
+        task['due_color'] = due_color
+        task['due_date'] = reschedule_date['day']
+      }
+    })
+    localStorage.setItem('task_list', JSON.stringify(this.task_list))
+    this.filter_tasks()
+  }
+
+  get_due_color(day_difference){
+    if (day_difference === 0) {
+      return "green"
+    } else if (day_difference === 1) {
+      return "#ad6200"
+    } else if (day_difference >= 2 && day_difference <= 7) {
+      return "#692ec2"
+    } else {
+      return "#666"
+    }
+  }
+
+
+
 }

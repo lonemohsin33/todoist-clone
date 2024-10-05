@@ -4,7 +4,7 @@
             <h4>Inbox</h4>
         </div>
         <div class="col-10 col-md-10">
-            <app-task-list-component [task_list]="task_list" [show_inbox]="false" (new_task_list_func)="all_task_list($event)"></app-task-list-component>
+            <app-task-list-component [task_list]="task_list" [show_inbox]="false" (new_task_list_func)="all_task_list($event)" (reschedule_task)="reschedule_single_task($event)"></app-task-list-component>
         </div>
     </div>
     

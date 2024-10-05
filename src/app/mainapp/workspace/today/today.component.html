@@ -1,6 +1,6 @@
 <div class="today-cont my-cont" [ngClass]="show_navbar?'today': ''">
     <div class="row justify-content-around justify-content-md-end mt-5 mb-4">
-        <div class="col-10 col-md-10 mb-4">
+        <div class="col-10 col-md-10">
             <h4>Today</h4>
         </div>
         <div class="col-10 col-md-10 mb-4" *ngIf="overdue_task_list.length + today_task_list.length>0">
@@ -8,20 +8,20 @@
         </div>
         <div *ngIf="overdue_task_list.length" class="col-10 col-md-10">
             <div class="d-flex align-items-center" style="position: relative;">
-              <div class="col-md-8 col-8">
-                <i *ngIf="overdue_not_hidden" class="bi bi-chevron-down fw-bold" style="font-size: small; text-align: center;" (click)="overdue_not_hidden = false"> Overdue</i>
-                <i *ngIf="!overdue_not_hidden" class="bi bi-chevron-right fw-bold" style="font-size: small; text-align: center;"
+              <div class="col-md-8 col-8" style="margin-left: -16px;">
+                <i *ngIf="overdue_not_hidden" class="bi bi-chevron-down fw-bold chevron" (click)="overdue_not_hidden = false"> Overdue</i>
+                <i *ngIf="!overdue_not_hidden" class="bi bi-chevron-right fw-bold chevron" 
                    (click)="overdue_not_hidden = true"> Overdue</i>
               </div>
               <div class="col-md-2 col-2 text-start" style="font-size:x-small; text-align: center; color: #dc4c3e;">
-               <button #rescheduleButton (click)="calendar_open_func()" class="btn fw-bold btn-sm" style="color: #dc4c3e;">Reschedule</button> 
+               <button #rescheduleButton (click)="reschedule_previous_tasks()" class="btn fw-bold btn-sm" style="color: #dc4c3e; margin-left: 20px;">Reschedule</button> 
               </div>
             </div>
             <hr class="custom-hr">
         </div>
           
         <div *ngIf="overdue_task_list.length && overdue_not_hidden" class="col-10 col-md-10">
-            <app-task-list-component [task_list]="overdue_task_list" (new_task_list_func)="overdue_task_list_func($event)"></app-task-list-component>
+            <app-task-list-component [task_list]="overdue_task_list" (new_task_list_func)="overdue_task_list_func($event)" (reschedule_task)="reschedule_single_task($event)"></app-task-list-component>
         </div>
         <div class="col-10 col-md-10">
             <p class="fw-bold" style="font-size:small;">{{date_extended.day}} {{date_extended.month_name}} - Today - {{date_extended.day_name}}</p>
@@ -29,7 +29,7 @@
 
         </div>
         <div class="col-10 col-md-10">
-            <app-task-list-component [task_list]="today_task_list" (new_task_list_func)="today_task_list_func($event)"></app-task-list-component>
+            <app-task-list-component [task_list]="today_task_list" (new_task_list_func)="today_task_list_func($event)" (reschedule_task)="reschedule_single_task($event)"></app-task-list-component>
         </div>
     </div>
     

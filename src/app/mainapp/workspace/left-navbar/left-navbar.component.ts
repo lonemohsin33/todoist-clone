@@ -42,8 +42,13 @@ export class LeftNavbarComponent implements OnInit {
   background_color = ''
   selected_item : number| null = null
   is_collapsed : boolean = true
+  today_task_count=0
+  task_list_count =0
+  upcoming_task_count =0
   ngOnInit() {
+    this.filter_tasks_and_set_counts()
   }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.task_counts && this.task_counts) {
       console.log(changes)
@@ -51,6 +56,24 @@ export class LeftNavbarComponent implements OnInit {
       this.cdr.detectChanges();
     }
   }
+
+  filter_tasks_and_set_counts(){
+    let all_tasks = JSON.parse(localStorage.getItem('task_list')||'[]')
+    console.log(all_tasks)
+    all_tasks.map((task_item)=>{
+      if (task_item.day_diff ==0){
+        this.today_task_count+=1
+      }else if (task_item.day_diff>=1){
+        this.upcoming_task_count+=1
+      }
+    })
+    this.items[2].value = String(all_tasks.length)
+    this.items[3].value = String(this.today_task_count)
+    this.items[4].value = String(this.upcoming_task_count)
+
+  }
+
+
 
   private update_task_counts() {
     // Update the value in items based on task_counts

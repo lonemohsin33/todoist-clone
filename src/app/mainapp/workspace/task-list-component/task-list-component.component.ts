@@ -11,8 +11,10 @@ export class TaskListComponentComponent implements OnInit {
   @Input() show_inbox:boolean = true
   @ViewChild('rescheduleicon', { static: false }) reschedule_icon!: ElementRef;
   @Output() new_task_list_func = new EventEmitter()
+  @Output() reschedule_task = new EventEmitter()
   calendarPosition = { top: '0px', left: '0px' };
   calendar_open=false
+  current_selected_task:Task
 
   constructor() { }
 
@@ -47,6 +49,18 @@ export class TaskListComponentComponent implements OnInit {
             this.new_task_list_func.emit(task)
         });
     }
+  }
+
+  date_to_show(date_obj){
+    console.log(date_obj)
+    let rescudule_obj = {"task": this.current_selected_task, "date":date_obj}
+    console.log(rescudule_obj)
+    this.reschedule_task.emit(rescudule_obj)
+  }
+
+  task_clicked(task_obj){
+    console.log(task_obj)
+    this.current_selected_task = task_obj
   }
 
 
