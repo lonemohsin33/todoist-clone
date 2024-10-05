@@ -33,8 +33,8 @@ export class InboxContentComponent implements OnInit {
   }
 
   filter_tasks(){
-    this.task_list = JSON.parse(localStorage.getItem('task_list')||'[]')
-    let sorted_tasks = this.task_list.sort((a, b) => new Date(a.date_time_date_format).getTime() - new Date(b.date_time_date_format).getTime());
+    let task_list = JSON.parse(localStorage.getItem('task_list')||'[]')
+    let sorted_tasks = task_list.sort((a, b) => new Date(a.date_time_date_format).getTime() - new Date(b.date_time_date_format).getTime());
     this.task_list = sorted_tasks
 
   }
@@ -85,6 +85,10 @@ export class InboxContentComponent implements OnInit {
     let task_count = {"Today": this.today_task_list.length + this.overdue_task_list.length,"Inbox":this.task_list.length, "Upcoming":this.task_list.length-(this.today_task_list.length + this.overdue_task_list.length)}
     console.log(this.task_list)
     this.task_count.emit(task_count)
+  }
+
+  all_task_list(task_obj){
+    this.task_list = this.task_list.filter(obj=>obj.id!==task_obj.id)
   }
 
 }

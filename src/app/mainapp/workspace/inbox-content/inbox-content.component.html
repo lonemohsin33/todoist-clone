@@ -1,10 +1,10 @@
 <div class="today-cont my-cont" [ngClass]="show_navbar?'today': ''">
-    <div class="row justify-content-around justify-content-md-end mt-5 mb-4">
+    <div class="row justify-content-around justify-content-md-end mt-5">
         <div class="col-10 col-md-10 mb-4">
             <h4>Inbox</h4>
         </div>
         <div class="col-10 col-md-10">
-            <app-task-list-component [task_list]="task_list" [show_inbox]="false" (new_task_list_func)="task_list=$event"></app-task-list-component>
+            <app-task-list-component [task_list]="task_list" [show_inbox]="false" (new_task_list_func)="all_task_list($event)"></app-task-list-component>
         </div>
     </div>
     
