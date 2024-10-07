@@ -61,7 +61,7 @@ export class LeftNavbarComponent implements OnInit {
     let all_tasks = JSON.parse(localStorage.getItem('task_list')||'[]')
     console.log(all_tasks)
     all_tasks.map((task_item)=>{
-      if (task_item.day_diff ==0){
+      if (task_item.day_diff <=0){
         this.today_task_count+=1
       }else if (task_item.day_diff>=1){
         this.upcoming_task_count+=1

@@ -22,8 +22,10 @@ export class InboxContentComponent implements OnInit {
   task_list: Task[] = JSON.parse(localStorage.getItem("task_list"))|| []
   show_task_card: boolean = false
   date_extended = {}
-  today_task_list = []
-  overdue_task_list = []
+  today_task_count=0
+  overdue_task_count=0
+  upcoming_task_count=0
+  total_task_count =0
 
   constructor(private date:DateService) { }
 
@@ -32,10 +34,17 @@ export class InboxContentComponent implements OnInit {
     this.filter_tasks()
   }
 
+  get_curr_task_counts(){
+
+  }
+
   filter_tasks(){
     let task_list = JSON.parse(localStorage.getItem('task_list')||'[]')
     let sorted_tasks = task_list.sort((a, b) => new Date(a.date_time_date_format).getTime() - new Date(b.date_time_date_format).getTime());
     this.task_list = sorted_tasks
+    for(let task of task_list){
+      this.count_tasks(task)
+    }
 
   }
 
@@ -61,14 +70,12 @@ export class InboxContentComponent implements OnInit {
   }, 0); 
   }
 
-  add_new_task(task){
-    if (task.day_diff ==0){
-      this.today_task_list.push(task)
-    }
+  add_new_task(task:Task){
     this.task_list.push(task)
-    this.count_tasks()
     console.log(this.task_list)
     localStorage.setItem("task_list", JSON.stringify(this.task_list))
+    this.count_tasks(task)
+    this.task_count.emit({"Today":this.today_task_count + this.overdue_task_count, "Inbox": this.total_task_count, "Upcoming": this.upcoming_task_count})
     this.show_task_card = false
   }
 
@@ -81,14 +88,32 @@ export class InboxContentComponent implements OnInit {
     this.date_extended = event
   }
 
-  count_tasks(){
-    let task_count = {"Today": this.today_task_list.length + this.overdue_task_list.length,"Inbox":this.task_list.length, "Upcoming":this.task_list.length-(this.today_task_list.length + this.overdue_task_list.length)}
-    console.log(this.task_list)
-    this.task_count.emit(task_count)
+  count_tasks(task:Task){
+    if (task.day_diff==0){
+      this.today_task_count+=1
+    }else if (task.day_diff==0){
+      this.overdue_task_count+=1
+    }else if (task.day_diff>=1){
+      this.upcoming_task_count+=1
+    }
+    this.total_task_count+=1
   }
 
   all_task_list(task_obj){
     this.task_list = this.task_list.filter(obj=>obj.id!==task_obj.id)
+    this.remove_tasks(task_obj)
+    this.task_count.emit({"Today":this.today_task_count + this.overdue_task_count, "Inbox": this.total_task_count, "Upcoming": this.upcoming_task_count})
+  }
+
+  remove_tasks(task:Task){
+    if (task.day_diff==0){
+      this.today_task_count-=1
+    }else if (task.day_diff==0){
+      this.overdue_task_count-=1
+    }else if (task.day_diff>=1){
+      this.upcoming_task_count-=1
+    }
+    this.total_task_count-=1
   }
 
   reschedule_single_task(reschedule_obj){
