@@ -91,7 +91,7 @@ export class InboxContentComponent implements OnInit {
   count_tasks(task:Task){
     if (task.day_diff==0){
       this.today_task_count+=1
-    }else if (task.day_diff==0){
+    }else if (task.day_diff<0){
       this.overdue_task_count+=1
     }else if (task.day_diff>=1){
       this.upcoming_task_count+=1
@@ -108,7 +108,7 @@ export class InboxContentComponent implements OnInit {
   remove_tasks(task:Task){
     if (task.day_diff==0){
       this.today_task_count-=1
-    }else if (task.day_diff==0){
+    }else if (task.day_diff<0){
       this.overdue_task_count-=1
     }else if (task.day_diff>=1){
       this.upcoming_task_count-=1

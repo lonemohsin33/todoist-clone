@@ -29,7 +29,7 @@ export class LeftNavbarComponent implements OnInit {
   constructor(
   private router:Router, private cdr: ChangeDetectorRef
   ) { }
-  items = [{"name": "Add task", "icon": 'bi bi-plus-circle-fill', 'class':'task-class', "value":""}, {"name": "Search", "icon": 'bi bi-search', 'color':'',"value":"0" }, {"name": "Inbox", "icon": 'bi bi-inbox', 'color':'',"value":"0", 'route': '/workspace/inbox'},{"name": "Today", "icon": 'bi bi-calendar2-day', 'color':'',"value":"0", 'route': '/workspace/today'}, {"name": "Upcoming", "icon": 'bi bi-calculator', 'color':'', "value":""}, {"name": "Filters & Labels", "icon": 'bi bi-filter', 'color':'',"value":""}]
+  items = [{"name": "Add task", "icon": 'bi bi-plus-circle-fill', 'class':'task-class', "value":""}, {"name": "Search", "icon": 'bi bi-search', 'color':'',"value":"0" }, {"name": "Inbox", "icon": 'bi bi-inbox', 'color':'',"value":"0", 'route': '/workspace/inbox'},{"name": "Today", "icon": 'bi bi-calendar2-day', 'color':'',"value":"0", 'route': '/workspace/today'}, {"name": "Upcoming", "icon": 'bi bi-calculator', 'color':'', "value":"", 'route':'/workspace/upcoming'}, {"name": "Filters & Labels", "icon": 'bi bi-filter', 'color':'',"value":""}]
 
   my_projects = [
     {

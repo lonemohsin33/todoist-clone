@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LeftNavbarComponent } from './left-navbar/left-navbar.component';
 import { TaskPageComponent } from './task-page/task-page.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { UpcomingTasksComponent } from './upcoming-tasks/upcoming-tasks.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path:'inbox',
     component:InboxComponent
+  },
+  {
+    path:'upcoming',
+    component:UpcomingTasksComponent
   }
 ];
 
