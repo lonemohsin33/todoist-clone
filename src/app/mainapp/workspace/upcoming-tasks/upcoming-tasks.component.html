@@ -1,1 +1,9 @@
-<p>upcoming-tasks works!</p>
+<div class="d-flex" style="max-width: 100vw;">
+    <div style="position: fixed; z-index: 1000;">
+        <app-left-navbar (toggle_navbar)="recieve_collapse_event($event)" [task_counts]="task_count"></app-left-navbar>
+    </div>
+    <div style="box-sizing: border-box; width: 99%;" [ngClass]="show_navbar?'open-nav':'close-nav'">
+        <app-inbox-content (task_count)="task_count=$event"></app-inbox-content>
+    </div>
+
+</div>
