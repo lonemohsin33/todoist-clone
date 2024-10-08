@@ -11,7 +11,7 @@
     
     <div class="row justify-content-around justify-content-md-end" >
         <div class="col-10 col-md-10 add-item-div" >
-            <app-task-card #taskcard [show_card]="show_task_card" (show_card_output)="show_card($event)" [due_date]="date_to_show" (add_task_to_task_list)="add_new_task($event)" (date_extended)="date_event($event)"></app-task-card>
+            <app-task-card #taskcard [show_card]="show_task_card" (show_card_output)="show_card($event)" (add_task_to_task_list)="add_new_task($event)" (date_extended)="date_event($event)"></app-task-card>
             <!-- <div *ngIf="calendar_open || show_task_card" class="calender">
                 <app-calender-component></app-calender-component>
             </div> -->

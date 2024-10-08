@@ -10,10 +10,10 @@ import { Task } from '../task-card/interfaces';
   styleUrls: ['./inbox-content.component.scss']
 })
 export class InboxContentComponent implements OnInit {
-  @ViewChild('datepicker', {static:false}) datepicker: NgbDatepicker;
-  @ViewChild('taskcard', {static:false}) taskcard!:ElementRef ;
-  @ViewChild(TaskCardComponent, {static:false}) task_card_comp!: TaskCardComponent;
-  @ViewChild('rescheduleButton', { static: false }) rescheduleButton!: ElementRef;
+  @ViewChild('datepicker') datepicker: NgbDatepicker;
+  @ViewChild('taskcard') taskcard!:ElementRef ;
+  @ViewChild(TaskCardComponent) task_card_comp!: TaskCardComponent;
+  @ViewChild('rescheduleButton') rescheduleButton!: ElementRef;
   @Output() task_count = new EventEmitter()
 
   

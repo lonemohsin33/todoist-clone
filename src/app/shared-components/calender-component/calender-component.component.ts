@@ -7,8 +7,8 @@ import { NgbDateStruct, NgbDatepicker, NgbTimeStruct } from '@ng-bootstrap/ng-bo
   styleUrls: ['./calender-component.component.scss']
 })
 export class CalenderComponentComponent implements OnInit {
-  @ViewChild('calender', {static:false})  calender!:ElementRef 
-  @ViewChild('datepicker', {static:false}) datepicker: NgbDatepicker;
+  @ViewChild('calender')  calender!:ElementRef 
+  @ViewChild('datepicker') datepicker: NgbDatepicker;
   @Output() date_to_show = new EventEmitter()
   @Output() calendar_open = new EventEmitter()
   due_date: NgbDateStruct

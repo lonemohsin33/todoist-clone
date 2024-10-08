@@ -3,6 +3,7 @@ import { NgbDateStruct, NgbDatepicker, NgbTimeStruct } from '@ng-bootstrap/ng-bo
 import { DateService } from 'src/app/services/date.service';
 import { CalenderComponentComponent } from 'src/app/shared-components/calender-component/calender-component.component';
 import { TaskCardComponent } from '../task-card/task-card.component';
+import { DateExtended } from './interface';
 
 @Component({
   selector: 'app-today',
@@ -10,10 +11,10 @@ import { TaskCardComponent } from '../task-card/task-card.component';
   styleUrls: ['./today.component.scss']
 })
 export class TodayComponent implements OnInit {
-  @ViewChild('datepicker', {static:false}) datepicker: NgbDatepicker;
-  @ViewChild('taskcard', {static:false}) taskcard!:ElementRef ;
-  @ViewChild(TaskCardComponent, {static:false}) task_card_comp!: TaskCardComponent;
-  @ViewChild('rescheduleButton', { static: false }) rescheduleButton!: ElementRef;
+  @ViewChild('datepicker') datepicker: NgbDatepicker;
+  @ViewChild('taskcard') taskcard!:ElementRef ;
+  @ViewChild(TaskCardComponent) task_card_comp!: TaskCardComponent;
+  @ViewChild('rescheduleButton') rescheduleButton!: ElementRef;
   @Output() task_count = new EventEmitter()
 
   
@@ -21,7 +22,7 @@ export class TodayComponent implements OnInit {
   is_hovered:boolean = false
   task_list: {}[] = JSON.parse(localStorage.getItem("task_list"))|| []
   show_task_card: boolean = false
-  date_extended = {}
+  date_extended:DateExtended
   today_task_list = []
   overdue_task_list = []
   upcoming_task_list = []
@@ -32,7 +33,7 @@ export class TodayComponent implements OnInit {
   constructor(private date:DateService) { }
 
   ngOnInit() {
-    this.date_extended= this.date.set_and_get_today()
+    this.date_extended = this.date.set_and_get_today()
     this.filter_tasks()
   }
 

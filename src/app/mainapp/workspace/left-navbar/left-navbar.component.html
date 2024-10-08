@@ -36,7 +36,7 @@
             </div>
         </div>
         <div *ngIf="!hide_project_div">
-            <div *ngFor="let item of my_projects" class="menu-items-div height" (click)="item_click(item)">
+            <div *ngFor="let item of my_projects;let i=index" class="menu-items-div height" (click)="item_click(item,i)">
                 <p class="p-class" [ngClass]="item.name == 'Add task' ? 'task-class' : 'basic-class'">
                     <i [class]="item.class" [ngClass]="item.icon" style="font-size: large;"></i>
                     &nbsp; {{item.name}}

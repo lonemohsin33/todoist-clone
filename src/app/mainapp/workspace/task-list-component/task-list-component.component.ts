@@ -9,7 +9,7 @@ import { Task } from '../task-card/interfaces';
 export class TaskListComponentComponent implements OnInit {
   @Input() task_list:Task[] = []
   @Input() show_inbox:boolean = true
-  @ViewChild('rescheduleicon', { static: false }) reschedule_icon!: ElementRef;
+  @ViewChild('rescheduleicon') reschedule_icon!: ElementRef;
   @Output() new_task_list_func = new EventEmitter()
   @Output() reschedule_task = new EventEmitter()
   calendarPosition = { top: '0px', left: '0px' };

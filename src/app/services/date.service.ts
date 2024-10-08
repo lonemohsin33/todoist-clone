@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { DateExtended } from '../mainapp/workspace/today/interface';
 
 @Injectable({
   providedIn: 'root',
@@ -28,15 +29,15 @@ export class DateService {
     return new Date();
   }
 
-  set_and_get_today() {
-    const now = new Date();
-    this.today = {
-      year: now.getFullYear(),
-      month: now.getMonth() + 1,
-      day: now.getDate(),
-      month_name: this.month_names[now.getMonth() + 1],
-      day_name: this.days[now.getDay()]
+  set_and_get_today(): DateExtended {
+    const today = new Date();
+
+    return {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1, // Months are 0-indexed
+      day: today.getDate(),
+      month_name: today.toLocaleString('default', { month: 'long' }), // E.g., October
+      day_name: today.toLocaleString('default', { weekday: 'long' }) // E.g., Tuesday
     };
-    return this.today
   }
 }

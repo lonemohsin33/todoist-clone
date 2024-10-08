@@ -7,6 +7,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class TaskPageComponent implements OnInit {
   show_navbar:boolean = true
+  task_count:{} = {"Inbox": 0, "Upcoming":0, "Today": 0}
 
   ngOnInit() {
   }

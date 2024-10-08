@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class InboxComponent implements OnInit {
   show_navbar:boolean = true
   constructor() { }
+  task_count:{} = {"Inbox": 0, "Upcoming":0, "Today": 0}
 
   ngOnInit() {
   }

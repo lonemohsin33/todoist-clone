@@ -24,7 +24,7 @@
             <app-task-list-component [task_list]="overdue_task_list" (new_task_list_func)="overdue_task_list_func($event)" (reschedule_task)="reschedule_single_task($event)"></app-task-list-component>
         </div>
         <div class="col-10 col-md-10">
-            <p class="fw-bold" style="font-size:small;">{{date_extended.day}} {{date_extended.month_name}} - Today - {{date_extended.day_name}}</p>
+            <p class="fw-bold" style="font-size:small;">{{date_extended?.day}} {{date_extended?.month_name}} - Today - {{date_extended?.day_name}}</p>
             <hr class="custom-hr">
 
         </div>

@@ -9,9 +9,9 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./task-card.component.scss']
 })
 export class TaskCardComponent implements OnInit {
-  @ViewChild(CalenderComponentComponent, {static:false}) calender_comp!:CalenderComponentComponent
-  @ViewChild('calender', { static: false }) calender!: ElementRef;
-  @ViewChild('taskcard', { static: false }) taskcard!: ElementRef;
+  @ViewChild(CalenderComponentComponent) calender_comp!:CalenderComponentComponent
+  @ViewChild('calender') calender!: ElementRef;
+  @ViewChild('taskcard') taskcard!: ElementRef;
   @Input() show_card = false
   @Output() show_card_output = new EventEmitter()
   // @Output() show_calender = new EventEmitter()
