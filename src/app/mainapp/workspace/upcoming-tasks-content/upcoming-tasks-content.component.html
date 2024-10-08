@@ -1,0 +1,35 @@
+<div class="today-cont my-cont" [ngClass]="show_navbar?'today': ''">
+    <div class="row justify-content-around justify-content-md-end mt-5">
+        <div class="col-10 col-md-10 mb-4">
+            <h4>Upcoming</h4>
+        </div>
+        <div class="col-10 col-md-10">
+            <app-task-list-component [task_list]="task_list" [show_inbox]="false" (new_task_list_func)="all_task_list($event)" (reschedule_task)="reschedule_single_task($event)"></app-task-list-component>
+        </div>
+    </div>
+    
+    
+    <div class="row justify-content-around justify-content-md-end" >
+        <div class="col-10 col-md-10 add-item-div" >
+            <app-task-card #taskcard [show_card]="show_task_card" (show_card_output)="show_card($event)" [due_date]="date_to_show" (add_task_to_task_list)="add_new_task($event)" (date_extended)="date_event($event)"></app-task-card>
+            <!-- <div *ngIf="calendar_open || show_task_card" class="calender">
+                <app-calender-component></app-calender-component>
+            </div> -->
+            <div *ngIf="!show_task_card" class="d-flex align-items-center gap-2"
+            (mouseenter)="on_hover()"
+            (mouseleave)="on_leave()"
+            (click)="create_new_task()">
+                <i class="bi"
+                [ngClass]="is_hovered ? 'bi-plus-circle-fill' : 'bi-plus'"
+                 style="color: red; font-weight: lighter; font-size: larger;"></i>
+                
+                 <p
+                 [ngClass]="is_hovered ? 'add-task-text-red' : 'add-task-text'"
+                  class="text-muted text-align add-task-text">
+                    Add Task
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</div>
