@@ -1,7 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Task } from '../task-card/interfaces';
+import { InboxContentComponent } from '../inbox-content/inbox-content.component';
 // import { stat } from 'fs';
+declare var $: any;;
 
 @Component({
   selector: 'app-left-navbar',
@@ -25,6 +28,7 @@ import { Router } from '@angular/router';
 export class LeftNavbarComponent implements OnInit {
   @Output() toggle_navbar = new EventEmitter()
   @Input() task_counts:{} = {"Inbox": 0, "Upcoming":0, "Today": 0}
+  @ViewChild(InboxContentComponent) inbox_content_comp:InboxContentComponent
 
   constructor(
   private router:Router, private cdr: ChangeDetectorRef
@@ -45,6 +49,10 @@ export class LeftNavbarComponent implements OnInit {
   today_task_count=0
   task_list_count =0
   upcoming_task_count =0
+  show_task_card:boolean = true
+  task_list: Task[] = JSON.parse(localStorage.getItem("task_list"))|| []
+  date_extended = {}
+  task_card_div=false
   ngOnInit() {
     this.filter_tasks_and_set_counts()
   }
@@ -115,12 +123,39 @@ export class LeftNavbarComponent implements OnInit {
     }
     document.getElementById(`item${i}`).style.backgroundColor = '#fffdf6'
     this.selected_item = i
-    this.router.navigate([`${item.route}`])
+    console.log(item)
+    if (item.name === 'Add task'){
+      this.task_card_div=!this.task_card_div
+    }else if (item.name ==='Search'){
+    }else if (item.name === 'Filters & Labels'){
+    }
+    else{
+      this.router.navigate([`${item.route}`])
+    }
   }
 
   collapse_navbar(){
     this.is_collapsed = !this.is_collapsed
     this.toggle_navbar.emit(this.is_collapsed)
+  }
+
+  show_card(event){
+    console.log(event)
+    this.show_task_card = event
+  }
+
+  date_event(event){
+    this.date_extended = event
+  }
+
+  add_new_task(task:Task){
+    console.log(task)
+    if (this.inbox_content_comp) {
+      this.inbox_content_comp.add_new_task(task);
+    } else {
+      console.error("InboxContentComponent is not available yet.");
+    }
+  
   }
 
 }

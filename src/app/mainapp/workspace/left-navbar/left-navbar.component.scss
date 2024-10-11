@@ -158,5 +158,25 @@ p{
     transition-delay: random($limit: 1);
 }
 
+.centered-task-div {
+    position: fixed;
+    width: inherit;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    .centered-task-div {
+      width: 90%; /* Adjust the width to 90% on small screens */
+    }
+  }
+  
+
    
 

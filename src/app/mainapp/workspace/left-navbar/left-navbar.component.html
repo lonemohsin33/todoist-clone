@@ -81,3 +81,11 @@
 <div class="profile-nav-div-icon p-2 nav-transition" *ngIf="!is_collapsed">
     <i class="bi bi-list mb-4 file-icon" (click)="collapse_navbar()"></i>
 </div>
+
+
+<div class="centered-task-div" id="taskdiv" *ngIf="task_card_div" > 
+    <app-task-card #taskcard [show_card]="show_task_card" (show_card_output)="show_card($event)" (add_task_to_task_list)="add_new_task($event)" (date_extended)="date_event($event)"></app-task-card>
+</div>
+           
+
+
