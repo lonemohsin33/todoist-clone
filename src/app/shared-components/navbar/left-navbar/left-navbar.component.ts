@@ -1,8 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Task } from '../task-card/interfaces';
-import { InboxContentComponent } from '../inbox-content/inbox-content.component';
+import { Task } from '../../../mainapp/workspace/task-card/interfaces';
+import { InboxContentComponent } from '../../../mainapp/workspace/inbox-content/inbox-content.component';
+import { MatDialog } from '@angular/material';
+import { TaskCardComponent } from 'src/app/mainapp/workspace/task-card/task-card.component';
+import { TaskCardExplicitComponent } from '../../task-card-explicit/task-card-explicit.component';
 // import { stat } from 'fs';
 declare var $: any;;
 
@@ -31,7 +34,7 @@ export class LeftNavbarComponent implements OnInit {
   @ViewChild(InboxContentComponent) inbox_content_comp:InboxContentComponent
 
   constructor(
-  private router:Router, private cdr: ChangeDetectorRef
+  private router:Router, private cdr: ChangeDetectorRef,private dialog: MatDialog
   ) { }
   items = [{"name": "Add task", "icon": 'bi bi-plus-circle-fill', 'class':'task-class', "value":""}, {"name": "Search", "icon": 'bi bi-search', 'color':'',"value":"0" }, {"name": "Inbox", "icon": 'bi bi-inbox', 'color':'',"value":"0", 'route': '/workspace/inbox'},{"name": "Today", "icon": 'bi bi-calendar2-day', 'color':'',"value":"0", 'route': '/workspace/today'}, {"name": "Upcoming", "icon": 'bi bi-calculator', 'color':'', "value":"", 'route':'/workspace/upcoming'}, {"name": "Filters & Labels", "icon": 'bi bi-filter', 'color':'',"value":""}]
 
@@ -45,7 +48,7 @@ export class LeftNavbarComponent implements OnInit {
   chevron_class = 'bi bi-chevron-down'
   background_color = ''
   selected_item : number| null = null
-  is_collapsed : boolean = true
+  is_visible : boolean = true
   today_task_count=0
   task_list_count =0
   upcoming_task_count =0
@@ -53,7 +56,7 @@ export class LeftNavbarComponent implements OnInit {
   task_list: Task[] = JSON.parse(localStorage.getItem("task_list"))|| []
   date_extended = {}
   task_card_div=false
-  overdue_task_count
+  overdue_task_count  
   total_task_count
 
   ngOnInit() {
@@ -119,15 +122,23 @@ export class LeftNavbarComponent implements OnInit {
     }
 
   }
+  // toggle_items_list(key: 'hide_project_div' | 'hide_team_div') {
+  //   this[key] = !this[key];
+  //   this.chevron_class = this[key] ? 'bi bi-chevron-down' : 'bi bi-chevron-right';
+  // }
 
   item_click(item, i){
+    this.task_card_div=false
     if (this.selected_item !== null) {
       document.getElementById(`item${this.selected_item}`).style.backgroundColor = '#F5EEE3'
     }
     document.getElementById(`item${i}`).style.backgroundColor = '#fffdf6'
     this.selected_item = i
     if (item.name === 'Add task'){
+      console.log(this.show_task_card)
       this.task_card_div=!this.task_card_div
+      // this.show_task_card = true
+      // this.open_task_card_dialog()  
     }else if (item.name ==='Search'){
     }else if (item.name === 'Filters & Labels'){
     }
@@ -137,13 +148,13 @@ export class LeftNavbarComponent implements OnInit {
   }
 
   collapse_navbar(){
-    this.is_collapsed = !this.is_collapsed
-    this.toggle_navbar.emit(this.is_collapsed)
+    this.is_visible = !this.is_visible
+    this.toggle_navbar.emit(this.is_visible)
   }
 
   show_card(event){
     console.log(event)
-    this.show_task_card = event
+    this.task_card_div = event
   }
 
   date_event(event){
@@ -169,5 +180,28 @@ export class LeftNavbarComponent implements OnInit {
     }
     this.total_task_count+=1
   }
+
+  // open_task_card_dialog(): void {
+  //   console.log("i am here")
+  //   const dialogRef = this.dialog.open(TaskCardExplicitComponent, {
+  //     // position:{
+  //     //   // 'top': '50%',
+  //     //   // 'right': '50%'
+  //     // },
+  //     // // width: '600px',  // Adjust width as needed
+  //     // panelClass:'centered-task-div'
+  //   });
+  //   // dialogRef.componentInstance.show_card=true
+  //   // console.log(dialogRef.componentInstance.show_card)
+    
+
+  //   // Handle dialog close event
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result) {
+  //       console.log('Task Added:', result);
+  //       // Handle added task logic here
+  //     }
+  //   });
+  // }
 
 }

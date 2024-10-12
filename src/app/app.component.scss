@@ -1,0 +1,33 @@
+.main-content {
+    transition: all 0.3s ease-in-out; /* Adjusted for smoother transitions */
+    width: 100%; /* Ensuring it occupies full width */
+}
+
+.open-nav {
+    margin-left: 220px; /* Adjust based on your navbar width */
+    width: calc(100% - 300px); /* Adjusts the width accordingly */
+}
+
+.close-nav {
+    margin-left: 0; /* When navbar is closed */
+    width: 100%; /* Occupies full width */
+}
+
+/* Ensure the app-left-navbar transitions smoothly */
+app-left-navbar {
+    transition: transform 0.3s ease-in-out;
+    position: fixed; /* Keeps the navbar fixed */
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000; /* Ensures navbar is above main content */
+}
+
+.navbar-hidden {
+    transform: translateX(-100%); /* Hides the navbar */
+}
+
+/* Optional: Adding a class to control visibility */
+.navbar-visible {
+    transform: translateX(0); /* Shows the navbar */
+}

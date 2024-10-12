@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TODO-APP';
+  navbar_visible = true;
+
+  toggle_navbar(visible: boolean) {
+    this.navbar_visible = visible;
+  }
 }

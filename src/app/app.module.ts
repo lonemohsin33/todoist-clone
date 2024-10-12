@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LeftNavbarComponent } from './shared-components/navbar/left-navbar/left-navbar.component';
+import { NavbarModule } from './shared-components/navbar/navbar.module';
+import { MatDialogModule } from '@angular/material';
 
 
 @NgModule({
@@ -14,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NavbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

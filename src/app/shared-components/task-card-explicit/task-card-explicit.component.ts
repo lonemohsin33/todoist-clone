@@ -1,24 +1,25 @@
-import { style } from '@angular/animations';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-// import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { CalenderComponentComponent } from 'src/app/shared-components/calender-component/calender-component.component';
 import { v4 as uuidv4 } from 'uuid';
 
+
 @Component({
-  selector: 'app-task-card',
-  templateUrl: './task-card.component.html',
-  styleUrls: ['./task-card.component.scss']
+  selector: 'app-task-card-explicit',
+  templateUrl: './task-card-explicit.component.html',
+  styleUrls: ['./task-card-explicit.component.scss']
 })
-export class TaskCardComponent implements OnInit {
+export class TaskCardExplicitComponent implements OnInit {
   @ViewChild(CalenderComponentComponent) calender_comp!:CalenderComponentComponent
   @ViewChild('calender') calender!: ElementRef;
   @ViewChild('taskcard') taskcard!: ElementRef;
-  @Input() show_card = false
   @Output() show_card_output = new EventEmitter()
   // @Output() show_calender = new EventEmitter()
   @Input()   due_date = "Due date"
   @Output() add_task_to_task_list = new EventEmitter()
   @Output() date_extended= new EventEmitter()
+  @Input() show_card = true
+
 
   priority = "Priority"
   reminder = "Reminder"
@@ -167,7 +168,5 @@ export class TaskCardComponent implements OnInit {
     }
 
   }
-
-
 
 }

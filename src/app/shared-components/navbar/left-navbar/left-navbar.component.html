@@ -1,4 +1,4 @@
-<div class="background-nav" *ngIf="is_collapsed">
+<div class="background-nav" [class.is-visible]="is_visible" style="position: fixed; z-index: 1000;" *ngIf="is_visible">
     <div class="profile-nav-div-nav  mb-4">
         <div class="profile-img-name-div ">
             <img class="profile-img" src="assets/me.jpeg" alt="profile">
@@ -78,13 +78,13 @@
 
 </div>
 
-<div class="profile-nav-div-icon p-2 nav-transition" *ngIf="!is_collapsed">
+<div class="profile-nav-div-icon p-2 nav-transition" *ngIf="!is_visible">
     <i class="bi bi-list mb-4 file-icon" (click)="collapse_navbar()"></i>
 </div>
 
 
-<div class="centered-task-div" id="taskdiv" *ngIf="task_card_div" > 
-    <app-task-card #taskcard [show_card]="show_task_card" (show_card_output)="show_card($event)" (add_task_to_task_list)="add_new_task($event)" (date_extended)="date_event($event)"></app-task-card>
+<div id="taskdiv" *ngIf="task_card_div" > 
+    <app-task-card-explicit #taskcard [show_card]="show_task_card" (show_card_output)="show_card($event)" (add_task_to_task_list)="add_new_task($event)" (date_extended)="date_event($event)"></app-task-card-explicit>
 </div>
            
 

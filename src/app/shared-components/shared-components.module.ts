@@ -5,15 +5,19 @@ import { SharedComponentsRoutingModule } from './shared-components-routing.modul
 import { NgbDatepickerModule, NgbModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CalenderComponentComponent } from './calender-component/calender-component.component';
+import { WorkspaceModule } from '../mainapp/workspace/workspace.module';
+import { MatDialogModule } from '@angular/material';
+import { TaskCardExplicitComponent } from './task-card-explicit/task-card-explicit.component';
 
-const components = [CalenderComponentComponent]
+const components = [CalenderComponentComponent,TaskCardExplicitComponent]
 @NgModule({
-  declarations: [CalenderComponentComponent],
+  declarations: [CalenderComponentComponent, TaskCardExplicitComponent],
   imports: [
     CommonModule,
     SharedComponentsRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    MatDialogModule
   ],
   exports: components
 })

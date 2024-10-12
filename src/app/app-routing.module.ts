@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path:'workspace',
     loadChildren: () => import('./mainapp/workspace/workspace.module').then(m => m.WorkspaceModule)
+  },
+  {
+    path:'shared',
+    loadChildren: () => import('./shared-components/shared-components.module').then(m => m.SharedComponentsModule)
   }
 ];
 

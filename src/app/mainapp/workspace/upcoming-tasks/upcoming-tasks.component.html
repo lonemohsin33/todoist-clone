@@ -1,7 +1,4 @@
 <div class="d-flex" style="max-width: 100vw;">
-    <div style="position: fixed; z-index: 1000;">
-        <app-left-navbar (toggle_navbar)="recieve_collapse_event($event)"></app-left-navbar>
-    </div>
     <div style="box-sizing: border-box; width: 99%;" [ngClass]="show_navbar?'open-nav':'close-nav'">
         <app-upcoming-tasks-content></app-upcoming-tasks-content>
     </div>

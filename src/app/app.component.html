@@ -1,2 +1,9 @@
-<!-- <h1>In app module</h1> -->
-<router-outlet></router-outlet>
+<div style="max-width: 100vw;overflow-x: hidden;">
+  <app-left-navbar 
+    (toggle_navbar)="toggle_navbar($event)"
+    [ngClass]="{'navbar-hidden': !navbar_visible}"
+  ></app-left-navbar>
+  <main class="main-content" [ngClass]="navbar_visible ? 'open-nav' : 'close-nav'">
+    <router-outlet></router-outlet>
+  </main>
+</div>
