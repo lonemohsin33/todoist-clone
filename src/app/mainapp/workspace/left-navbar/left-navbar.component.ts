@@ -53,6 +53,9 @@ export class LeftNavbarComponent implements OnInit {
   task_list: Task[] = JSON.parse(localStorage.getItem("task_list"))|| []
   date_extended = {}
   task_card_div=false
+  overdue_task_count
+  total_task_count
+
   ngOnInit() {
     this.filter_tasks_and_set_counts()
   }
@@ -123,7 +126,6 @@ export class LeftNavbarComponent implements OnInit {
     }
     document.getElementById(`item${i}`).style.backgroundColor = '#fffdf6'
     this.selected_item = i
-    console.log(item)
     if (item.name === 'Add task'){
       this.task_card_div=!this.task_card_div
     }else if (item.name ==='Search'){
@@ -149,13 +151,23 @@ export class LeftNavbarComponent implements OnInit {
   }
 
   add_new_task(task:Task){
-    console.log(task)
-    if (this.inbox_content_comp) {
-      this.inbox_content_comp.add_new_task(task);
-    } else {
-      console.error("InboxContentComponent is not available yet.");
+    this.task_list.push(task)
+    console.log(this.task_list)
+    localStorage.setItem("task_list", JSON.stringify(this.task_list))
+    this.count_tasks(task)
+    // this.task_count.emit({"Today":this.today_task_count + this.overdue_task_count, "Inbox": this.total_task_count, "Upcoming": this.upcoming_task_count})
+    this.show_task_card = false
+  }
+
+  count_tasks(task:Task){
+    if (task.day_diff==0){
+      this.today_task_count+=1
+    }else if (task.day_diff<0){
+      this.overdue_task_count+=1
+    }else if (task.day_diff>=1){
+      this.upcoming_task_count+=1
     }
-  
+    this.total_task_count+=1
   }
 
 }
