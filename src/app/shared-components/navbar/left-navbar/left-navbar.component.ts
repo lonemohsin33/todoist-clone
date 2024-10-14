@@ -57,7 +57,7 @@ export class LeftNavbarComponent implements OnInit {
   date_extended = {}
   task_card_div=false
   overdue_task_count  
-  total_task_count
+  total_task_count = 0
 
   ngOnInit() {
     this.filter_tasks_and_set_counts()
@@ -72,6 +72,9 @@ export class LeftNavbarComponent implements OnInit {
   }
 
   filter_tasks_and_set_counts(){
+    this.total_task_count=0
+    this.today_task_count=0
+    this.upcoming_task_count=0
     let all_tasks = JSON.parse(localStorage.getItem('task_list')||'[]')
     console.log(all_tasks)
     all_tasks.map((task_item)=>{
@@ -80,8 +83,9 @@ export class LeftNavbarComponent implements OnInit {
       }else if (task_item.day_diff>=1){
         this.upcoming_task_count+=1
       }
+      this.total_task_count+=1
     })
-    this.items[2].value = String(all_tasks.length)
+    this.items[2].value = String(this.total_task_count)
     this.items[3].value = String(this.today_task_count)
     this.items[4].value = String(this.upcoming_task_count)
 
@@ -136,7 +140,7 @@ export class LeftNavbarComponent implements OnInit {
     this.selected_item = i
     if (item.name === 'Add task'){
       console.log(this.show_task_card)
-      this.task_card_div=!this.task_card_div
+      this.task_card_div=true
       // this.show_task_card = true
       // this.open_task_card_dialog()  
     }else if (item.name ==='Search'){
@@ -162,12 +166,12 @@ export class LeftNavbarComponent implements OnInit {
   }
 
   add_new_task(task:Task){
+    console.log(task)
     this.task_list.push(task)
     console.log(this.task_list)
     localStorage.setItem("task_list", JSON.stringify(this.task_list))
-    this.count_tasks(task)
-    // this.task_count.emit({"Today":this.today_task_count + this.overdue_task_count, "Inbox": this.total_task_count, "Upcoming": this.upcoming_task_count})
     this.show_task_card = false
+    this.filter_tasks_and_set_counts()
   }
 
   count_tasks(task:Task){
@@ -179,6 +183,7 @@ export class LeftNavbarComponent implements OnInit {
       this.upcoming_task_count+=1
     }
     this.total_task_count+=1
+    console.log(this.today_task_count, this.total_task_count)
   }
 
   // open_task_card_dialog(): void {
