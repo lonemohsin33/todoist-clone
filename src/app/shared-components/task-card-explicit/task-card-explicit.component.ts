@@ -19,6 +19,8 @@ export class TaskCardExplicitComponent implements OnInit {
   @Output() add_task_to_task_list = new EventEmitter()
   @Output() date_extended= new EventEmitter()
   @Input() show_card = true
+  @ViewChild('calenderdiv') calenderdiv!: ElementRef;
+
 
 
   priority = "Priority"
@@ -40,6 +42,7 @@ export class TaskCardExplicitComponent implements OnInit {
   diff_color = ""
   day_diff = 0
   due_date_time_format:Date
+  calendarPosition = { top: '0px', left: '0px' };
 
   constructor() { }
 
@@ -106,15 +109,13 @@ export class TaskCardExplicitComponent implements OnInit {
 
   open_calender(){
     console.log('calender Called.')
-    setTimeout(()=>{
-      if (this.calender){
-        console.log(this.calender_comp)
-        this.calender_comp.set_focus()
+        this.calendar_open = !this.calendar_open;
+        if (this.calendar_open && this.calenderdiv) {
+          const button_rect = this.calenderdiv.nativeElement.getBoundingClientRect();
+          this.calendarPosition.top = `${button_rect.bottom}px`;
+          this.calendarPosition.left = `${button_rect.left}px`;
         }
-    },0)
-    
-
-    this.calendar_open = !this.calendar_open
+    // this.calendar_open = this.calendar_open
     console.log(this.calendar_open)
 
   }
