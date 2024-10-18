@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path:'shared',
     loadChildren: () => import('./shared-components/shared-components.module').then(m => m.SharedComponentsModule)
+  },
+  {
+    path:'teams',
+    loadChildren: () => import('./mainapp/teams/teams.module').then(m => m.TeamsModule)
   }
 ];
 

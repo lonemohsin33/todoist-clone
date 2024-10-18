@@ -51,7 +51,7 @@
 
     <div class="mt-4">
         <div class="profile-nav-div  mb-2 ">
-            <div class="profile-img-name-div ">
+            <div class="profile-img-name-div" (click)="navigate_to_teams()">
                 <img class="project-img" src="assets/test.jpg" alt="profile">
                 <p style="font-size: small; padding: 0px; margin: 0px;">My Team</p>
             </div>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div *ngIf="!hide_team_div">
-            <div *ngFor="let item of my_projects" class="menu-items-div height">
+            <div *ngFor="let item of my_teams; let i=index" class="menu-items-div height" (click)="item_click(item,i)">
                 <p class="p-class" [ngClass]="item.name == 'Add task' ? 'task-class' : 'basic-class'">
                     <i [class]="item.class" [ngClass]="item.icon" style="font-size: large;"></i>
                     &nbsp; {{item.name}}

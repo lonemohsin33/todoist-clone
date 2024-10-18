@@ -43,6 +43,11 @@ export class LeftNavbarComponent implements OnInit {
       "name": "Office", "icon": "bi bi-hash", "class": "", "value": ""
     }
   ]
+  my_teams = [
+    {
+      "name": "team 1", "icon": "bi bi-hash", "class": "", "value": "", "route":"/teams/active"
+    }
+  ]
   hide_project_div = false
   hide_team_div = false
   chevron_class = 'bi bi-chevron-down'
@@ -184,6 +189,10 @@ export class LeftNavbarComponent implements OnInit {
     }
     this.total_task_count+=1
     console.log(this.today_task_count, this.total_task_count)
+  }
+
+  navigate_to_teams(){
+    this.router.navigate(['teams/active'])
   }
 
   // open_task_card_dialog(): void {
