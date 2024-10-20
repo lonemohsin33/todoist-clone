@@ -6,6 +6,8 @@ import { InboxContentComponent } from '../../../mainapp/workspace/inbox-content/
 import { MatDialog } from '@angular/material';
 import { TaskCardComponent } from 'src/app/mainapp/workspace/task-card/task-card.component';
 import { TaskCardExplicitComponent } from '../../task-card-explicit/task-card-explicit.component';
+import { createClient } from '@supabase/supabase-js'
+import { SupabaseService } from 'src/app/services/supabase.service';
 // import { stat } from 'fs';
 declare var $: any;;
 
@@ -34,7 +36,10 @@ export class LeftNavbarComponent implements OnInit {
   @ViewChild(InboxContentComponent) inbox_content_comp:InboxContentComponent
 
   constructor(
-  private router:Router, private cdr: ChangeDetectorRef,private dialog: MatDialog
+  private router:Router,
+   private cdr: ChangeDetectorRef,
+   private dialog: MatDialog,
+   private _supabase_service:SupabaseService
   ) { }
   items = [{"name": "Add task", "icon": 'bi bi-plus-circle-fill', 'class':'task-class', "value":""}, {"name": "Search", "icon": 'bi bi-search', 'color':'',"value":"0" }, {"name": "Inbox", "icon": 'bi bi-inbox', 'color':'',"value":"0", 'route': '/workspace/inbox'},{"name": "Today", "icon": 'bi bi-calendar2-day', 'color':'',"value":"0", 'route': '/workspace/today'}, {"name": "Upcoming", "icon": 'bi bi-calculator', 'color':'', "value":"", 'route':'/workspace/upcoming'}, {"name": "Filters & Labels", "icon": 'bi bi-filter', 'color':'',"value":""}]
 
@@ -65,6 +70,9 @@ export class LeftNavbarComponent implements OnInit {
   total_task_count = 0
 
   ngOnInit() {
+    this._supabase_service.getData('todo-list').then((data)=>{
+      console.log(data)
+    })
     this.filter_tasks_and_set_counts()
   }
 
