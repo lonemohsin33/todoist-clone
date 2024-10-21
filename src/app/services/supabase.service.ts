@@ -17,6 +17,7 @@ export class SupabaseService {
 
   // Example: Fetch data from a table
   async getData(tableName: string) {
+    console.log(tableName)
     const { data, error } = await this.supabase
       .from(tableName)
       .select('*');
