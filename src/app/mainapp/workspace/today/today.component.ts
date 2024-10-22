@@ -4,6 +4,7 @@ import { DateService } from 'src/app/services/date.service';
 import { CalenderComponentComponent } from 'src/app/shared-components/calender-component/calender-component.component';
 import { TaskCardComponent } from '../task-card/task-card.component';
 import { DateExtended } from './interface';
+import { SupabaseService } from 'src/app/services/supabase.service';
 
 @Component({
   selector: 'app-today',
@@ -30,7 +31,9 @@ export class TodayComponent implements OnInit {
   calendar_open=false
   calendarPosition = { top: '0px', left: '0px' };
   reschedule_date = {}
-  constructor(private date:DateService) { }
+  constructor(
+    private date:DateService,
+    private _supabase_service:SupabaseService) { }
 
   ngOnInit() {
     this.date_extended = this.date.set_and_get_today()
@@ -60,6 +63,9 @@ export class TodayComponent implements OnInit {
         task['due_color'] = due_color
         task['due_date'] = reschedule_date['day']
       }
+    })
+    this._supabase_service.insertData('todo_table', {}).then((data)=>{
+      console.log(data)
     })
     localStorage.setItem('task_list', JSON.stringify(this.task_list))
     this.filter_tasks()
