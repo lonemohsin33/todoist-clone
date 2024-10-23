@@ -67,6 +67,7 @@ export class TodayComponent implements OnInit {
     this._supabase_service.insertData('todo_table', {}).then((data)=>{
       console.log(data)
     })
+    console.log(this.task_list)
     localStorage.setItem('task_list', JSON.stringify(this.task_list))
     this.filter_tasks()
   }
