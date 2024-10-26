@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { SupabaseService } from 'src/app/services/supabase.service';
 import { CalenderComponentComponent } from 'src/app/shared-components/calender-component/calender-component.component';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -44,7 +45,7 @@ export class TaskCardExplicitComponent implements OnInit {
   due_date_time_format:Date
   calendarPosition = { top: '0px', left: '0px' };
 
-  constructor() { }
+  constructor(private _supabase_services:SupabaseService) { }
 
   ngOnInit() {
     console.log(this.show_card)
@@ -73,7 +74,6 @@ export class TaskCardExplicitComponent implements OnInit {
   add_task(){
     console.log('task created.')
     let task_obj = {
-      "id": uuidv4(),
       "task_name": this.task_name,
       "task_desc": this.task_desc,
       "priority_obj": {
@@ -86,6 +86,7 @@ export class TaskCardExplicitComponent implements OnInit {
       "day_diff": this.day_diff,
       "date_time_date_format":this.due_date_time_format
     }
+    this._supabase_services.insertData('tasks', task_obj)
     this.add_task_to_task_list.emit(task_obj)
     this.clear_form()
   }
