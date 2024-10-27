@@ -19,6 +19,7 @@ export class SupabaseService {
     // Set up auth state listener
     this.supabase.auth.onAuthStateChange((event, session) => {
       this.currentUser.next(session?.user ?? null);
+      console.log(this.currentUser)
     });
   }
 
