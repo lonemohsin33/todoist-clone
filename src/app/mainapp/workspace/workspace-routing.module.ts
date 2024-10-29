@@ -6,6 +6,7 @@ import { UpcomingTasksComponent } from './upcoming-tasks/upcoming-tasks.componen
 
 
 const routes: Routes = [
+  { path: '', redirectTo: 'today', pathMatch: 'full' },
   {
     path:'today',
     component:TaskPageComponent
