@@ -4,7 +4,7 @@
     (toggle_navbar)="toggle_navbar($event)"
     [ngClass]="{'navbar-hidden': !navbar_visible}"
   ></app-left-navbar>
-  <main class="main-content" [ngClass]="navbar_visible ? 'open-nav' : 'close-nav'">
+  <main class="main-content" [ngClass]="navbar_visible && disable_navbar ? 'open-nav' : 'close-nav'">
     <router-outlet></router-outlet>
   </main>
 </div>
