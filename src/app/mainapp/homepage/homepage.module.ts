@@ -4,6 +4,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UpperNavbarComponent } from './upper-navbar/upper-navbar.component';
 import { HomePageContentComponent } from './home-page-content/home-page-content.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LandingPageComponent, UpperNavbarComponent, HomePageContentComponent],
+  declarations: [LandingPageComponent, UpperNavbarComponent, HomePageContentComponent, FooterComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
