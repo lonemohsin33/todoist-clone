@@ -12,4 +12,8 @@ export class UpperNavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  open_nav_menu(){
+    console.log('nav menu clicked')
+  }
+
 }
