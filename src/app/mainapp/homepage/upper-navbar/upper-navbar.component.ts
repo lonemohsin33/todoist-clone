@@ -7,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpperNavbarComponent implements OnInit {
 
+  close_upper_nav = false
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  open_nav_menu(){
-    console.log('nav menu clicked')
-  }
+  open_nav_menu() {
+    this.close_upper_nav = !this.close_upper_nav; // Open the overlay
+}
 
 }
