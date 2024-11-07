@@ -5,16 +5,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { UpperNavbarComponent } from './upper-navbar/upper-navbar.component';
 import { HomePageContentComponent } from './home-page-content/home-page-content.component';
 import { FooterComponent } from './footer/footer.component';
+import { FeaturesComponent } from './features/features.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LandingPageComponent
+  },
+  {
+    path: 'features',
+    component: FeaturesComponent
   }
 ];
 
 @NgModule({
-  declarations: [LandingPageComponent, UpperNavbarComponent, HomePageContentComponent, FooterComponent],
+  declarations: [LandingPageComponent, UpperNavbarComponent, HomePageContentComponent, FooterComponent, FeaturesComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
