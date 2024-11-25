@@ -5,3 +5,29 @@
 .top{
     height: 40vh;
 }
+
+.responsive-web-mobile-view{
+    font-weight: bold;
+    width: 750px;
+    font-size:2.5rem;
+
+}
+
+.custom-hr {
+    width: 80vw;
+    font-weight: 500;
+    margin-top: 5px;
+}
+@media (max-width:768px) {
+    .responsive-web-mobile-view{
+        width: 80%;
+        font-weight: 500;
+        font-size: 2rem;
+    }
+    .custom-hr {
+        width: 100%;
+        font-weight: 500;
+        margin-top: 2px;
+    }
+    
+}
